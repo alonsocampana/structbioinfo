@@ -1,6 +1,6 @@
-## Threading
+# 10 Threading
 
-### Introduction
+## Introduction
 
 Folding problem: Given a sequence find its fold
 
@@ -12,11 +12,11 @@ Threading is the name given for a familiy of algorithms, which for a given seque
 
 In reality, as we've seen in another problems, considering all the forces leading to a given system's energy is computationally very expensive. So, considering all the possible correspondences between the sequence and each of the templates is computationally unfeasible. For this reason, we need efficient search algorithms and a reduced search space. Even in reduced search spaces, the search is NP hard.
 
-### Template library
+## Template library
 
 Usually the whole sequence is not considered and only the parts of the sequence corresponding to secondary structural elements are considered. Furthermore the sequences can be split by PDB chains, by different domains, by fragments...
 
-### The scoring function
+## The scoring function
 
 Usually the energies driving to a given fold are split into different sources:
 
@@ -34,11 +34,11 @@ And the individual terms are deduced from relative counts of certain patterns in
 
 - $E_{sspred}$: Quantifies the compatibility between the second structural elements found in the query sequence (if known) and the template structure.
 
-### Heuristic reductions of the search space:
+## Heuristic reductions of the search space:
 
 There are several methods needed for making the search of possible configurations more efficient:
 
-#### 3D profiles
+### 3D profiles
 Account mainly for $E_{single}$, the 3D structure of the template sequence is reduced to a sequence discretized environmental categories (can also be split by secondary structural elements):
 
 ![](./images/env-cat.png)
@@ -54,7 +54,7 @@ the score of each residue is given by $s_{i,j} = \frac{ln(P(j|i))}{P_i}$, where 
 - All Z above 7 are considered
 - DP is fast, but it gives an incomplete description of the environment and doesn't take into account pairwise or higher order energies.
 
-#### Contact graph (core threading)
+### Contact graph (core threading)
 
 ![](./images/cont-graph.png)
 
@@ -62,7 +62,7 @@ the score of each residue is given by $s_{i,j} = \frac{ln(P(j|i))}{P_i}$, where 
 - It can allow or disallow gaps into those cores, leading to different search complexities. Gaps are allowed in loops.
 - Core segments are not allowed to overlap
 
-### Finding global optimality in threading
+## Finding global optimality in threading
 
 There's no proabilistic model for quantifying the probability of a given template being the correct fold of the sequence.
 
@@ -73,21 +73,21 @@ Confidence measures are used instead:
 - Classification with ML methods
 
 
-### Some examples of threading algorithms
+## Some examples of threading algorithms
 
-#### Pairwise threading optimization algorithms
+### Pairwise threading optimization algorithms
 
 ![](./images/threading-algos.png)
 
-#### Threader
+### Threader
 
 ![](./images/threader-algo.png)
 
 Calculates pseudo-energies by counts, splitting the distances into three categorical values (Short ($k \le 10$), Medium and Long (k > 30), considering several different atom pairs and adding solvation potential)
-#### Lathrop & Smith
+### Lathrop & Smith
 ![](./images/lathrop.png)
 
-### Branch and bound
+## Branch and bound
 
 The branch and bound method is an exact method for searching for an optimal alignment, but it takes exponential time in the size of the protein. The algorithm functions by assuming that each solution can be partitioned into subsets, and that the upper limit on a subset’s solution can be computed quickly. In the diagram, each circle illustrates the space of possible threadings, the solid lines indicate partitions made in a previous step, and dashed lines indicate partitions made in the current step. Furthermore, numbers indicate lower bounds for newly created subsets, and arrows indicate the set that was partitioned. Branch and bound selects the subset with the best possible bounds, subdivides it, and computes a bound for each subsequent subset. The aspects of this search which determine its efficiency are how the lower bound for the set of possible threadings is computed, and how the threading set is partitioned into subsets. Ideally, the lower bound should take into consideration the interaction of the set with the preceding set, and the best interaction with other sets. A threading set is partitioned by selecting a core segment, and choosing a split point in the set.
 

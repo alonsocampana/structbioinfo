@@ -1,6 +1,6 @@
-## 8 - Homology modelling of protein structure prediction
+# 9 Homology modelling of protein structure prediction
 
-### Introduction
+## Introduction
 
 The number of protein structures known in the PDB has grown steadily but at a much lower pace than the number of sequences found in Uni-Prot.
 Homology tends to conserve both tertiary and secondary structure, solvent accesibility, and finally function.
@@ -9,15 +9,15 @@ Basic assumptions:
 
 - Similar sequence = similar structure $\implies$ homologous proteins have similar structures. But it's not always true, as very diverging sequences can have a high structural homology.
 
-### Homology derived secondary structure of proteins (HSSP plot)
+## Homology derived secondary structure of proteins (HSSP plot)
 
 The correct inference of a shared secondary structure by the level of homology between the two sequences depends on the length of the alignment (x axis) and the percentage of homology (y axis).
 ![](./images/hssp-plot.png)
 
-### Homology modeling
+## Homology modeling
 ![](./images/homo-modeling.png)
 
-#### Template selection
+### Template selection
 
 Done in function of:
 - Sequence similarity (>25%, greater is better). For this purpose BLAST or PsiBLAST can be used.
@@ -26,13 +26,13 @@ Done in function of:
 
 Usually iterative cycles of aligment, modeling and evaluation are done in order to choose the best model possible.
 
-#### Alignment Template - Target
+### Alignment Template - Target
 
 Using dynamic programming, and probably a MSA.
 
 The regions related to secondary structural elements should be conserved, because changes in those regions are likely to result in proteins with different global structures.
 
-#### Structure modeling
+### Structure modeling
 - *Backbone generation*:
   - We place the coordinates of the sequence found to be homologous in the database.
   - It's often almost trivial and has the goal of providing an initial guess.
@@ -77,35 +77,35 @@ The regions related to secondary structural elements should be conserved, becaus
 ![](./images/model-val9.png)
 ![](./images/limiting-steps.png)
 
-#### Applications
+### Applications
 
 ![](./images/app-homo-modelling.png)
 
-#### Resources
+### Resources
 
 ![](./images/homo-resources.png)
 
-#### DB-based loop placement
-#### Bragi
+### DB-based loop placement
+### Bragi
 ![](./images/bragi.png)
-#### LIP
+### LIP
 - Loops are clustered according to length and distance
 - Fitting the consensus by superimposition of the main atoms in both terminal ends.
 - Uses sequence similarity and a loop-specific scoring matrix.
 - Scores the different loop candidates with a ranking function derived from the RMSD for the mentioned atoms.
-#### Ab-initio loop placement
-#### Moult & James
+### Ab-initio loop placement
+### Moult & James
 - Search possible backbone torsion angles based on Ramachandran possible combinations.
 - Add side chains using romaters
 - Score by energetic parameters
 
-####CONGEN
+### CONGEN
 - Uses discrete angles allowed by the ramachandran plot regions
 - Special treatment of Gly and Pro\
 - Energies calculated using CHARMM force field
 - Side chains constructed in parallel
 
-#### Rotamer libraries: BBind/Bbdep and SCRWL
+### Rotamer libraries: BBind/Bbdep and SCRWL
 Most used rotamer library, with two variants: Backbone-independent and backbone dependent. Contains up to 81 rotamers per aminoacid.
 Backbone-dependent are given for binned phi/psi angles.
 For every rotamer the following values are given:
@@ -116,7 +116,7 @@ For every rotamer the following values are given:
 For long sequences it cannot be systematically scanned.
 
 ![](./images/sc-algo.png)
-#### Dead end elimination algorithm
+### Dead end elimination algorithm
 Proposed by Desmet et al. and Branch&Bound-like
 It states that if for two rotamers $i_r$ and $i_s$:
 
@@ -126,7 +126,7 @@ Then $i_r$is not part of the optimal solution, because the lowest energy while u
 ![](./images/dee-algo.png)
 Remaining search space can be tested by enumeration.
 
-### Side chain modeling qualiting assessment
+## Side chain modeling qualiting assessment
 Highly dependent on the search algorithm used and the quality of the rotamer library.
 Quality measures:
 - Percentage of correct $\chi _1$ assignments

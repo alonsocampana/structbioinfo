@@ -1,5 +1,5 @@
-## Lecture 8
-### Introduction
+# 8 Secondary Structure prediction
+## Introduction
 Prediction of secondary structure is an important step towards the prediction of the whole 3D structure. It determines up to some point the global fold.
 
 The driving forces can be assumed to be found in the local characteristics of the polypeptide chain.
@@ -19,13 +19,13 @@ Other classifications:
 - parallel/antiparallel sheets
 - Bend (S)
 
-#### Helix dipole moment
+### Helix dipole moment
 Alpha helix has an overall dipole caused by the dipoles of the carbonyl groups found in the peptide bond, all pointing along the helix axis, resulting in a positive dipole towards the N-terminus.
 
 This overall dipole can destabilize the helix. That's why alpha helices are often capped by a N-terminal positively charged aminoacid.
 
 This dipole is also of importance because the N-terminal positive charge can be often used to bind negative charged ligans, such as phosphates.
-### Amino Acid propensities
+## Amino Acid propensities
 Aminoacids are observed at different frequencies in the different secondary structural element types.
 
 These propensities can be used to predict secondary structure.
@@ -38,7 +38,7 @@ Aminoacid classifications:
 ![](./images/aaclas.png)
 
 Different methods can make use of already determined propensities:
-####Chou-Fasman method
+### Chou-Fasman method
 - Uses table of propensities derived from CD spectroscopy data of soluble, globular proteins.
 - Likelihood for each aminoacid
 
@@ -66,13 +66,13 @@ Chou_fasman(sequence):
 ```
 ![](./images/properties-chou.png)
 Problem: it doesn't take into account the structure of the neighbors
-#### The gor method
+### The gor method
 - Built on Chou-Fasman values.
 - One matrix for each feature
 - Evaluate each residue plus 8 in each direction (sliding window of 17)
 - Underpredicts beta strand
 
-#### Supervised machine learning methods
+### Supervised machine learning methods
 - Train your algorithm on training dataset and evaluate on test dataset.
 - k-nearest neighbor methods: Define a starting point as centroid, enclose close elements until k training examples are selected and label them by majority vote.
   - Application to proteins:
@@ -85,7 +85,7 @@ Problem: it doesn't take into account the structure of the neighbors
 ![](./images/predator.png)
 ![](./images/sec-pred.png)
 ![](./images/psi-pred.png)
-### Physical approach towards helix prediction(AGADIR)
+## Physical approach towards helix prediction(AGADIR)
 Based on Helix-coil transition theory, general for polymers but often used for proteins. Tries to capture the difference in energy between a coil random structure and an $\alpha$-helix.
 
 $\Delta G_{helical-segment} = \Delta G_{Int}+\Delta G_{Hbond}+\Delta G_{SD}+\Delta G_{nonH}+\Delta G_{dipole}$
@@ -102,7 +102,7 @@ $\Delta G_{nonH}$ Captures the contribution to stability of N and C terminal res
 
 $\Delta G_{dipole}$ represents the iteraction of charged groups with the helix macrodipole
 
-### Trans-membrane element prediction
+## Trans-membrane element prediction
 
 Trans membrane proteins constitute 30% of all proteins in a cell, and receptors are an important target for pharmaceutical industry.
 
@@ -121,7 +121,6 @@ There are different likelihood tables:
 - Kyte-Doolittle hydropathy.
 - Hopp-Woods hydrophilicity.
 - Eisenberg et al. normalized consensus.
-
 Basic hydrophilibity plot: Calculate average hydropathy over a window and slide window until the entire sequence has been analyzed
 ![](./images/post-pro.png)
 
@@ -130,6 +129,6 @@ Also markov-chain models are used to solve this problem, and neural networks.
 $\beta$-barrel element prediction is mostly based on hydropathy analysis and similarity search.
 ![](./images/tm-prot.png)
 
-#### performance assessment
+### performance assessment
 Biggest databases result in more accurate predictions.
 - Qindex: Percentage of residues correctly predicted as $\alpha$-helix,coil... the score is high even for random predictions. $Q_3 = \frac {N_{predicted}}{N_{observed}} \cdot 100$

@@ -1,0 +1,2523 @@
+<!DOCTYPE html>
+<html data-markdown-preview-plus-context="html-export">
+  <head>
+    <meta charset="utf-8" />
+    <title>structural_bioinformatics</title><script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    jax: ["input/TeX","output/HTML-CSS"],
+    extensions: ["[a11y]/accessibility-menu.js"],
+    'HTML-CSS': {
+      availableFonts: [],
+      webFont: 'TeX',
+      undefinedFamily: "serif",
+      mtextFontInherit: true,
+    },
+    TeX: {
+  "extensions": [
+    "AMSmath.js",
+    "AMSsymbols.js",
+    "noErrors.js",
+    "noUndefined.js"
+  ],
+  "Macros": {},
+  "equationNumbers": {}
+},
+    showMathMenu: true
+  });
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js"></script>
+    <style>@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-thin-webfont.woff2') format('woff2');
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-thinitalic-webfont.woff2') format('woff2');
+  font-weight: 200;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-light-webfont.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-lightitalic-webfont.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-regular-webfont.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-italic-webfont.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-medium-webfont.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-mediumitalic-webfont.woff2') format('woff2');
+  font-weight: 600;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-bold-webfont.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-bolditalic-webfont.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-black-webfont.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-blackitalic-webfont.woff2') format('woff2');
+  font-weight: 900;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'roboto_condensedlight';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/robotocondensed-light-webfont.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: condensed;
+}
+@font-face {
+  font-family: 'roboto_condensedlight_italic';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/robotocondensed-lightitalic-webfont.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-stretch: condensed;
+}
+@font-face {
+  font-family: 'roboto_condenseditalic';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/robotocondensed-italic-webfont.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+  font-stretch: condensed;
+}
+@font-face {
+  font-family: 'roboto_condensedregular';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/robotocondensed-regular-webfont.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: condensed;
+}
+@font-face {
+  font-family: 'roboto_condensedbold';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/robotocondensed-bold-webfont.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: condensed;
+}
+@font-face {
+  font-family: 'roboto_condensedbold_italic';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/robotocondensed-bolditalic-webfont.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-stretch: condensed;
+}
+.emoji {
+  max-width: 1em !important;
+}
+del {
+  text-decoration: none;
+  position: relative;
+}
+del::after {
+  border-bottom: 1px solid black;
+  content: '';
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 50%;
+}
+ul.contains-task-list li.task-list-item {
+  position: relative;
+  list-style-type: none;
+}
+ul.contains-task-list li.task-list-item input.task-list-item-checkbox {
+  position: absolute;
+  transform: translateX(-100%);
+  width: 3rem;
+}
+span.critic.comment {
+  position: relative;
+}
+span.critic.comment::before {
+  content: '\1f4ac';
+  position: initial;
+}
+span.critic.comment > span {
+  display: none;
+}
+span.critic.comment:hover > span {
+  display: initial;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  border: 1px solid;
+  border-radius: 5px;
+  max-height: 4em;
+  overflow: auto;
+}
+span.critic.comment:focus > span {
+  display: initial;
+  text-decoration: underline;
+  position: initial;
+  top: auto;
+  left: auto;
+  border: initial;
+  border-radius: initial;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  background-color: transparent;
+}
+
+body {
+  overflow: initial !important;
+  overflow: hidden;
+  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+  line-height: 1.6;
+  word-wrap: break-word;
+  padding: 30px;
+  font-size: 16px;
+  color: #333;
+  background-color: #fff;
+}
+body > *:first-child {
+  margin-top: 0 !important;
+}
+body > *:last-child {
+  margin-bottom: 0 !important;
+}
+body a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+body .absent {
+  color: #c00;
+}
+body .anchor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  padding-right: 6px;
+  padding-left: 30px;
+  margin-left: -30px;
+}
+body .anchor:focus {
+  outline: none;
+}
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6 {
+  position: relative;
+  margin-top: 1em;
+  margin-bottom: 16px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+body h1 .octicon-link,
+body h2 .octicon-link,
+body h3 .octicon-link,
+body h4 .octicon-link,
+body h5 .octicon-link,
+body h6 .octicon-link {
+  display: none;
+  color: #000;
+  vertical-align: middle;
+}
+body h1:hover .anchor,
+body h2:hover .anchor,
+body h3:hover .anchor,
+body h4:hover .anchor,
+body h5:hover .anchor,
+body h6:hover .anchor {
+  padding-left: 8px;
+  margin-left: -30px;
+  text-decoration: none;
+}
+body h1:hover .anchor .octicon-link,
+body h2:hover .anchor .octicon-link,
+body h3:hover .anchor .octicon-link,
+body h4:hover .anchor .octicon-link,
+body h5:hover .anchor .octicon-link,
+body h6:hover .anchor .octicon-link {
+  display: inline-block;
+}
+body h1 tt,
+body h2 tt,
+body h3 tt,
+body h4 tt,
+body h5 tt,
+body h6 tt,
+body h1 code,
+body h2 code,
+body h3 code,
+body h4 code,
+body h5 code,
+body h6 code {
+  font-size: inherit;
+}
+body h1 {
+  padding-bottom: 0.3em;
+  font-size: 2.25em;
+  line-height: 1.2;
+  border-bottom: 1px solid #eee;
+}
+body h1 .anchor {
+  line-height: 1;
+}
+body h2 {
+  padding-bottom: 0.3em;
+  font-size: 1.75em;
+  line-height: 1.225;
+  border-bottom: 1px solid #eee;
+}
+body h2 .anchor {
+  line-height: 1;
+}
+body h3 {
+  font-size: 1.5em;
+  line-height: 1.43;
+}
+body h3 .anchor {
+  line-height: 1.2;
+}
+body h4 {
+  font-size: 1.25em;
+}
+body h4 .anchor {
+  line-height: 1.2;
+}
+body h5 {
+  font-size: 1em;
+}
+body h5 .anchor {
+  line-height: 1.1;
+}
+body h6 {
+  font-size: 1em;
+  color: #777;
+}
+body h6 .anchor {
+  line-height: 1.1;
+}
+body p,
+body blockquote,
+body ul,
+body ol,
+body dl,
+body table,
+body pre {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+body hr {
+  height: 4px;
+  padding: 0;
+  margin: 16px 0;
+  background-color: #e7e7e7;
+  border: 0 none;
+}
+body ul,
+body ol {
+  padding-left: 2em;
+}
+body ul.no-list,
+body ol.no-list {
+  padding: 0;
+  list-style-type: none;
+}
+body ul ul,
+body ul ol,
+body ol ol,
+body ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+body li > p {
+  margin-top: 16px;
+}
+body dl {
+  padding: 0;
+}
+body dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: bold;
+}
+body dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+body blockquote {
+  padding: 0 15px;
+  color: #777;
+  border-left: 4px solid #ddd;
+}
+body blockquote > :first-child {
+  margin-top: 0;
+}
+body blockquote > :last-child {
+  margin-bottom: 0;
+}
+body table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  word-break: normal;
+  word-break: keep-all;
+}
+body table th {
+  font-weight: bold;
+}
+body table th,
+body table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+body table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+body table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+body img {
+  max-width: 100%;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body .emoji {
+  max-width: none;
+}
+body span.frame {
+  display: block;
+  overflow: hidden;
+}
+body span.frame > span {
+  display: block;
+  float: left;
+  width: auto;
+  padding: 7px;
+  margin: 13px 0 0;
+  overflow: hidden;
+  border: 1px solid #ddd;
+}
+body span.frame span img {
+  display: block;
+  float: left;
+}
+body span.frame span span {
+  display: block;
+  padding: 5px 0 0;
+  clear: both;
+  color: #333;
+}
+body span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both;
+}
+body span.align-center > span {
+  display: block;
+  margin: 13px auto 0;
+  overflow: hidden;
+  text-align: center;
+}
+body span.align-center span img {
+  margin: 0 auto;
+  text-align: center;
+}
+body span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both;
+}
+body span.align-right > span {
+  display: block;
+  margin: 13px 0 0;
+  overflow: hidden;
+  text-align: right;
+}
+body span.align-right span img {
+  margin: 0;
+  text-align: right;
+}
+body span.float-left {
+  display: block;
+  float: left;
+  margin-right: 13px;
+  overflow: hidden;
+}
+body span.float-left span {
+  margin: 13px 0 0;
+}
+body span.float-right {
+  display: block;
+  float: right;
+  margin-left: 13px;
+  overflow: hidden;
+}
+body span.float-right > span {
+  display: block;
+  margin: 13px auto 0;
+  overflow: hidden;
+  text-align: right;
+}
+body code,
+body tt {
+  padding: 0;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 3px;
+}
+body code:before,
+body tt:before,
+body code:after,
+body tt:after {
+  letter-spacing: -0.2em;
+  content: "\00a0";
+}
+body code br,
+body tt br {
+  display: none;
+}
+body del code {
+  text-decoration: inherit;
+}
+body pre > code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+body .highlight {
+  margin-bottom: 16px;
+}
+body .highlight pre,
+body pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+}
+body .highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+body pre {
+  word-wrap: normal;
+}
+body pre code,
+body pre tt {
+  display: inline;
+  max-width: initial;
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+body pre code:before,
+body pre tt:before,
+body pre code:after,
+body pre tt:after {
+  content: normal;
+}
+body kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb;
+}
+span.critic.comment > span {
+  background-color: #fff;
+}
+a {
+  color: #337ab7;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-thin-webfont.woff2') format('woff2');
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-thinitalic-webfont.woff2') format('woff2');
+  font-weight: 200;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-light-webfont.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-lightitalic-webfont.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-regular-webfont.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-italic-webfont.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-medium-webfont.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-mediumitalic-webfont.woff2') format('woff2');
+  font-weight: 600;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-bold-webfont.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-bolditalic-webfont.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-black-webfont.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-blackitalic-webfont.woff2') format('woff2');
+  font-weight: 900;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'roboto_condensedlight';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/robotocondensed-light-webfont.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: condensed;
+}
+@font-face {
+  font-family: 'roboto_condensedlight_italic';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/robotocondensed-lightitalic-webfont.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-stretch: condensed;
+}
+@font-face {
+  font-family: 'roboto_condenseditalic';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/robotocondensed-italic-webfont.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+  font-stretch: condensed;
+}
+@font-face {
+  font-family: 'roboto_condensedregular';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/robotocondensed-regular-webfont.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: condensed;
+}
+@font-face {
+  font-family: 'roboto_condensedbold';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/robotocondensed-bold-webfont.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: condensed;
+}
+@font-face {
+  font-family: 'roboto_condensedbold_italic';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/robotocondensed-bolditalic-webfont.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-stretch: condensed;
+}
+@keyframes RotatingBackground {
+  0% {
+    background-position-x: 0%;
+  }
+  100% {
+    background-position-x: 100%;
+  }
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-thin-webfont.woff2') format('woff2');
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-thinitalic-webfont.woff2') format('woff2');
+  font-weight: 200;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-light-webfont.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-lightitalic-webfont.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-regular-webfont.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-italic-webfont.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-medium-webfont.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-mediumitalic-webfont.woff2') format('woff2');
+  font-weight: 600;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-bold-webfont.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-bolditalic-webfont.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-black-webfont.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-blackitalic-webfont.woff2') format('woff2');
+  font-weight: 900;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'roboto_condensedlight';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/robotocondensed-light-webfont.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: condensed;
+}
+@font-face {
+  font-family: 'roboto_condensedlight_italic';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/robotocondensed-lightitalic-webfont.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-stretch: condensed;
+}
+@font-face {
+  font-family: 'roboto_condenseditalic';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/robotocondensed-italic-webfont.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+  font-stretch: condensed;
+}
+@font-face {
+  font-family: 'roboto_condensedregular';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/robotocondensed-regular-webfont.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: condensed;
+}
+@font-face {
+  font-family: 'roboto_condensedbold';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/robotocondensed-bold-webfont.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: condensed;
+}
+@font-face {
+  font-family: 'roboto_condensedbold_italic';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/robotocondensed-bolditalic-webfont.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-stretch: condensed;
+}
+.debugger-breakpoint-icon::before,
+.debugger-shadow-breakpoint-icon::before {
+  font-family: 'Octicons Regular';
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  text-decoration: none;
+  font-size: 130%;
+  width: 130%;
+  height: 130%;
+  content: "\f052";
+}
+.debugger-breakpoint-icon,
+.debugger-breakpoint-icon-disabled,
+.debugger-breakpoint-icon-unresolved,
+.debugger-breakpoint-icon-conditional,
+.debugger-shadow-breakpoint-icon {
+  text-align: center;
+  display: block;
+  width: 0.8em;
+  cursor: pointer;
+}
+.debugger-breakpoint-icon-nonconditional {
+  color: #64B5F6;
+}
+.debugger-breakpoint-icon-conditional {
+  color: #FFCA28;
+}
+.debugger-breakpoint-icon-disabled {
+  position: relative;
+  top: -4px;
+  left: 2px;
+}
+.debugger-breakpoint-icon-disabled::before {
+  font-family: 'Octicons Regular';
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  text-decoration: none;
+  font-size: 78%;
+  width: 78%;
+  height: 78%;
+  content: "\f084";
+}
+.debugger-breakpoint-icon-unresolved {
+  position: relative;
+  top: -2px;
+}
+.debugger-breakpoint-icon-unresolved::before {
+  font-family: 'Octicons Regular';
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  text-decoration: none;
+  font-size: 80%;
+  width: 80%;
+  height: 80%;
+  content: "\f0e8";
+}
+.debugger-shadow-breakpoint-icon {
+  color: rgba(100, 181, 246, 0.4);
+}
+.debugger-current-line-highlight {
+  background: linear-gradient(to bottom, rgba(100, 181, 246, 0.8) 0%, rgba(100, 181, 246, 0.8) 5%, rgba(100, 181, 246, 0.3) 5%, rgba(100, 181, 246, 0.3) 95%, rgba(100, 181, 246, 0.8) 95%, rgba(100, 181, 246, 0.8) 100%);
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-thin-webfont.woff2') format('woff2');
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-thinitalic-webfont.woff2') format('woff2');
+  font-weight: 200;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-light-webfont.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-lightitalic-webfont.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-regular-webfont.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-italic-webfont.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-medium-webfont.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-mediumitalic-webfont.woff2') format('woff2');
+  font-weight: 600;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-bold-webfont.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-bolditalic-webfont.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-black-webfont.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/roboto-blackitalic-webfont.woff2') format('woff2');
+  font-weight: 900;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'roboto_condensedlight';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/robotocondensed-light-webfont.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: condensed;
+}
+@font-face {
+  font-family: 'roboto_condensedlight_italic';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/robotocondensed-lightitalic-webfont.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-stretch: condensed;
+}
+@font-face {
+  font-family: 'roboto_condenseditalic';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/robotocondensed-italic-webfont.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+  font-stretch: condensed;
+}
+@font-face {
+  font-family: 'roboto_condensedregular';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/robotocondensed-regular-webfont.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: condensed;
+}
+@font-face {
+  font-family: 'roboto_condensedbold';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/robotocondensed-bold-webfont.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: condensed;
+}
+@font-face {
+  font-family: 'roboto_condensedbold_italic';
+  src: url('atom://atom-material-ui/assets/fonts/Roboto/robotocondensed-bolditalic-webfont.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-stretch: condensed;
+}
+.gutter[gutter-name=diagnostics-gutter] {
+  width: 0.7em;
+}
+.diagnostics-gutter-ui-item {
+  display: flex;
+}
+.diagnostics-gutter-ui-item .icon {
+  display: flex;
+  width: 0.7em;
+  height: 0.7em;
+  font-size: 0.7em;
+  align-self: center;
+}
+.diagnostics-gutter-ui-item .icon::before {
+  width: 1em;
+  height: 1em;
+  font-size: 1em;
+  margin: 0;
+  align-self: center;
+}
+.diagnostics-gutter-ui-item.diagnostics-gutter-ui-gutter-info,
+.diagnostics-gutter-ui-item.diagnostics-gutter-ui-gutter-review {
+  color: #64B5F6;
+}
+.diagnostics-gutter-ui-item.diagnostics-gutter-ui-gutter-error {
+  color: #EF5350;
+}
+.diagnostics-gutter-ui-item.diagnostics-gutter-ui-gutter-action,
+.diagnostics-gutter-ui-item.diagnostics-gutter-ui-gutter-warning {
+  color: #FFCA28;
+}
+
+.bracket-matcher .region {
+  border-bottom: 1px dotted lime;
+  position: absolute;
+}
+.line-number.bracket-matcher.bracket-matcher {
+  color: rgba(238, 255, 255, 0.2);
+  background-color: #1c2429;
+}
+
+.spell-check-misspelling .region {
+  border-bottom: 2px dotted rgba(255, 51, 51, 0.75);
+}
+.spell-check-corrections {
+  width: 25em !important;
+}
+
+pre.editor-colors {
+  background-color: #263238;
+  color: #EEFFFF;
+}
+pre.editor-colors .wrap-guide {
+  background-color: #2b3940;
+}
+pre.editor-colors .indent-guide {
+  color: #2b3940;
+}
+pre.editor-colors .invisible-character {
+  color: #373b41;
+}
+pre.editor-colors .cursor-line {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+pre.editor-colors .gutter {
+  background-color: #263238;
+  color: rgba(238, 255, 255, 0.2);
+}
+pre.editor-colors .gutter .line-number.cursor-line {
+  background-color: #212b30;
+  color: rgba(238, 255, 255, 0.2);
+}
+pre.editor-colors .gutter .line-number.cursor-line-no-selection {
+  color: rgba(238, 255, 255, 0.2);
+}
+pre.editor-colors .fold-marker:after,
+pre.editor-colors .gutter .line-number.folded,
+pre.editor-colors .gutter .line-number:after {
+  color: #B2CCD6;
+}
+pre.editor-colors .invisible {
+  color: #EEFFFF;
+}
+pre.editor-colors .cursor {
+  color: #009688;
+  border-width: 2px;
+}
+pre.editor-colors .selection .region {
+  background-color: #3b4d56;
+}
+pre.editor-colors .search-results .syntax--marker .region {
+  background-color: transparent;
+  border: 1px solid #B2CCD6;
+}
+pre.editor-colors .search-results .syntax--marker.current-result .region {
+  border: 1px solid white;
+}
+.syntax--comment {
+  color: #4f6875;
+}
+.syntax--keyword {
+  color: #C792EA;
+}
+.syntax--keyword.syntax--control {
+  color: #C792EA;
+}
+.syntax--keyword.syntax--control.syntax--elements {
+  color: #B2CCD6;
+}
+.syntax--keyword.syntax--operator {
+  color: #89DDF3;
+}
+.syntax--keyword.syntax--other.syntax--special-method {
+  color: #82AAFF;
+}
+.syntax--keyword.syntax--other.syntax--unit {
+  color: #FFCB6B;
+}
+.syntax--storage {
+  color: #C792EA;
+}
+.syntax--constant {
+  color: #F07178;
+}
+.syntax--constant.syntax--character.syntax--escape {
+  color: #89DDF3;
+}
+.syntax--constant.syntax--numeric {
+  color: #F78C6A;
+}
+.syntax--constant.syntax--other.syntax--color {
+  color: #89DDF3;
+}
+.syntax--constant.syntax--other.syntax--symbol {
+  color: #C3E88D;
+}
+.syntax--constant.syntax--language.syntax--null {
+  color: #FF5370;
+}
+.syntax--variable {
+  color: #EEFFFF;
+}
+.syntax--variable.syntax--interpolation {
+  color: #eb434c;
+}
+.syntax--variable.syntax--parameter.syntax--function {
+  color: #F78C6A;
+}
+.syntax--variable.syntax--language {
+  color: #FF5370;
+}
+.syntax--variable.syntax--variable.syntax--object {
+  color: #FFCB6B;
+}
+.syntax--invalid.syntax--illegal {
+  background-color: #F07178;
+  color: #263238;
+}
+.syntax--string {
+  color: #C3E88D;
+}
+.syntax--string.syntax--regexp {
+  color: #89DDF3;
+}
+.syntax--string.syntax--regexp .syntax--source.syntax--ruby.syntax--embedded {
+  color: #FFCB6B;
+}
+.syntax--string.syntax--other.syntax--link {
+  color: #F07178;
+}
+.syntax--punctuation.syntax--definition.syntax--comment {
+  color: #4f6875;
+}
+.syntax--punctuation.syntax--definition.syntax--array,
+.syntax--punctuation.syntax--definition.syntax--parameters,
+.syntax--punctuation.syntax--definition.syntax--string,
+.syntax--punctuation.syntax--definition.syntax--variable {
+  color: #EEFFFF;
+}
+.syntax--punctuation.syntax--definition.syntax--array.syntax--begin,
+.syntax--punctuation.syntax--definition.syntax--parameters.syntax--begin,
+.syntax--punctuation.syntax--definition.syntax--string.syntax--begin,
+.syntax--punctuation.syntax--definition.syntax--variable.syntax--begin,
+.syntax--punctuation.syntax--definition.syntax--array.syntax--end,
+.syntax--punctuation.syntax--definition.syntax--parameters.syntax--end,
+.syntax--punctuation.syntax--definition.syntax--string.syntax--end,
+.syntax--punctuation.syntax--definition.syntax--variable.syntax--end {
+  color: #89DDF3;
+}
+.syntax--punctuation.syntax--definition.syntax--heading,
+.syntax--punctuation.syntax--definition.syntax--identity {
+  color: #82AAFF;
+}
+.syntax--punctuation.syntax--definition.syntax--bold {
+  color: #FFE082;
+  font-weight: bold;
+}
+.syntax--punctuation.syntax--definition.syntax--italic {
+  color: #C792EA;
+  font-style: italic;
+}
+.syntax--punctuation.syntax--definition.syntax--entity {
+  color: #89DDF3;
+}
+.syntax--punctuation.syntax--section.syntax--array {
+  color: #89DDF3;
+}
+.syntax--punctuation.syntax--section.syntax--embedded {
+  color: #89DDF3;
+}
+.syntax--punctuation.syntax--separator.syntax--key-value {
+  color: #89DDF3;
+}
+.syntax--punctuation.syntax--terminator {
+  color: #89DDF3;
+}
+.syntax--support.syntax--class {
+  color: #FFCB6B;
+}
+.syntax--support.syntax--function {
+  color: #82AAFF;
+}
+.syntax--support.syntax--function.syntax--any-method {
+  color: #82AAFF;
+}
+.syntax--support.syntax--type {
+  color: #FFCB6B;
+}
+.syntax--support.syntax--variable.syntax--dom {
+  color: #FFCB6B;
+}
+.syntax--entity.syntax--name.syntax--function {
+  color: #82AAFF;
+}
+.syntax--entity.syntax--name.syntax--type {
+  color: #EEFFFF;
+}
+.syntax--entity.syntax--other.syntax--inherited-class {
+  color: #C3E88D;
+}
+.syntax--entity.syntax--other.syntax--attribute-name.syntax--pseudo-element {
+  color: #C792EA;
+}
+.syntax--entity.syntax--other.syntax--attribute-name.syntax--attribute {
+  color: #C792EA;
+}
+.syntax--entity.syntax--name.syntax--class,
+.syntax--entity.syntax--name.syntax--type.syntax--class {
+  color: #FFCB6B;
+}
+.syntax--entity.syntax--name.syntax--section {
+  color: #82AAFF;
+}
+.syntax--entity.syntax--name.syntax--tag {
+  color: #F07178;
+}
+.syntax--entity.syntax--other.syntax--attribute-name {
+  color: #FFCB6B;
+}
+.syntax--meta.syntax--class {
+  color: #FFE082;
+}
+.syntax--meta.syntax--delimiter.syntax--period {
+  color: #89DDF3;
+}
+.syntax--meta.syntax--link {
+  color: #FFCB6B;
+}
+.syntax--meta.syntax--require {
+  color: #82AAFF;
+}
+.syntax--meta.syntax--selector {
+  color: #C792EA;
+}
+.syntax--meta.syntax--separator {
+  background-color: #373b41;
+  color: #EEFFFF;
+}
+.syntax--meta.syntax--brace.syntax--round,
+.syntax--meta.syntax--brace.syntax--square {
+  color: #89DDF3;
+}
+.syntax--none {
+  color: #EEFFFF;
+}
+.syntax--markup.syntax--bold {
+  color: #FFCB6B;
+  font-weight: bold;
+}
+.syntax--markup.syntax--changed {
+  color: #C792EA;
+}
+.syntax--markup.syntax--deleted {
+  color: #F07178;
+}
+.syntax--markup.syntax--italic {
+  color: #C792EA;
+  font-style: italic;
+}
+.syntax--markup.syntax--heading .syntax--punctuation.syntax--definition.syntax--heading {
+  color: #82AAFF;
+}
+.syntax--markup.syntax--inserted {
+  color: #C3E88D;
+}
+.syntax--markup.syntax--list {
+  color: #F07178;
+}
+.syntax--markup.syntax--quote {
+  color: #FFCB6B;
+}
+.syntax--markup.syntax--raw.syntax--inline {
+  color: #C3E88D;
+}
+.syntax--source.syntax--gfm .syntax--markup {
+  -webkit-font-smoothing: auto;
+}
+.syntax--source.syntax--gfm .syntax--markup.syntax--heading {
+  color: #C3E88D;
+}
+pre.editor-colors[mini] .scroll-view {
+  padding-left: 1px;
+}
+pre.editor-colors .highlight .region.bracket-matcher {
+  z-index: inherit;
+}
+.bracket-matcher .region {
+  border-bottom: 1px solid #009688;
+  box-sizing: border-box;
+  background-color: rgba(238, 255, 255, 0.1);
+  box-shadow: inset 0 -1px 0 #009688;
+}
+pre.editor-colors .spell-check-misspelling .region {
+  z-index: auto;
+}
+.syntax--jsx.syntax--component {
+  color: #F07178;
+}
+pre.editor-colors .syntax--source.syntax--js.syntax--jsx .syntax--jsx .syntax--entity.syntax--other.syntax--attribute-name {
+  font-style: normal;
+}
+.syntax--css .syntax--support.syntax--constant {
+  color: #89DDF3;
+}
+.syntax--css .syntax--support.syntax--property-name {
+  color: #73d1c8;
+}
+.syntax--css .syntax--keyword.syntax--unit {
+  color: #F78C6A;
+}
+.syntax--css .syntax--constant.syntax--numeric {
+  color: #FFE082;
+}
+.syntax--css .syntax--constant.syntax--color {
+  color: #FFE082;
+}
+.syntax--css .syntax--constant.syntax--color .syntax--punctuation {
+  color: currentColor;
+}
+.syntax--css .syntax--entity.syntax--tag {
+  color: #B2CCD6;
+}
+.syntax--css .syntax--entity.syntax--id {
+  color: #C792EA;
+}
+.syntax--css .syntax--punctuation.syntax--delimiter {
+  color: #89DDF3;
+}
+.syntax--css .syntax--punctuation.syntax--delimiter + .syntax--constant.syntax--numeric:not(.syntax--color) {
+  color: #F78C6A;
+}
+[data-grammar*="gfm"] .syntax--markup.syntax--underline.syntax--link {
+  color: #ff869a;
+}
+[data-grammar*="gfm"] .syntax--markup.syntax--underline.syntax--link span.syntax--punctuation {
+  color: #FF5370;
+}
+[data-grammar*="gfm"] .syntax--markup.syntax--strike {
+  position: relative;
+  color: rgba(238, 255, 255, 0.5);
+}
+[data-grammar*="gfm"] .syntax--markup.syntax--strike::after {
+  content: "";
+  position: absolute;
+  top: calc(54%);
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: rgba(238, 255, 255, 0.5);
+}
+[data-grammar*="gfm"] .syntax--table .syntax--border {
+  color: rgba(238, 255, 255, 0.5);
+}
+[data-grammar*="gfm"] .syntax--markup.syntax--heading {
+  color: #82AAFF;
+}
+[data-grammar*="gfm"] .syntax--punctuation.syntax--definition.syntax--begin,
+[data-grammar*="gfm"] .syntax--punctuation.syntax--definition.syntax--end {
+  color: #82AAFF;
+}
+[data-grammar*="gfm"] .syntax--punctuation.syntax--definition.syntax--begin + span:not(.syntax--function.syntax--parameter) {
+  color: #9cbbff;
+}
+.syntax--html .syntax--meta.syntax--tag.syntax--doctype,
+.syntax--jsx .syntax--meta.syntax--tag.syntax--doctype {
+  color: #C792EA;
+}
+.syntax--html .syntax--punctuation.syntax--tag,
+.syntax--jsx .syntax--punctuation.syntax--tag {
+  color: #89DDF3;
+}
+.syntax--js.syntax--constant {
+  color: #EEFFFF;
+}
+.syntax--js.syntax--support.syntax--variable.syntax--property {
+  color: #EEFFFF;
+}
+.syntax--js.syntax--support.syntax--variable.syntax--property.syntax--dom {
+  color: #82AAFF;
+}
+.syntax--js.syntax--entity.syntax--name.syntax--type {
+  color: #FFCB6B;
+}
+.syntax--js.syntax--variable.syntax--property {
+  color: #82AAFF;
+}
+.syntax--js.syntax--variable.syntax--other.syntax--object {
+  color: #EEFFFF;
+}
+.syntax--js.syntax--variable.syntax--other.syntax--object.syntax--property {
+  color: #82AAFF;
+}
+.syntax--js.syntax--string.syntax--quoted.syntax--template .syntax--other.syntax--object.syntax--property {
+  color: #C3E88D;
+}
+.syntax--js.syntax--constant.syntax--numeric {
+  color: #F78C6A;
+}
+.syntax--js.syntax--constant.syntax--boolean {
+  color: #F07178;
+}
+.syntax--js.syntax--punctuation.syntax--begin,
+.syntax--js.syntax--punctuation.syntax--end,
+.syntax--js.syntax--delimiter.syntax--object.syntax--comma,
+.syntax--js.syntax--brace.syntax--curly {
+  color: #89DDF3;
+}
+.syntax--comment .syntax--js.syntax--punctuation.syntax--begin,
+.syntax--comment .syntax--js.syntax--punctuation.syntax--end,
+.syntax--comment .syntax--js.syntax--delimiter.syntax--object.syntax--comma,
+.syntax--comment .syntax--js.syntax--brace.syntax--curly {
+  color: #4f6875;
+}
+.syntax--js.syntax--export .syntax--variable.syntax--default {
+  color: #C792EA;
+}
+.syntax--json .syntax--meta.syntax--array.syntax--structure .syntax--string.syntax--quoted.syntax--double {
+  color: #C3E88D;
+}
+.syntax--json .syntax--meta.syntax--array.syntax--structure .syntax--string.syntax--quoted.syntax--double > * {
+  color: currentColor;
+}
+.syntax--json .syntax--meta.syntax--array.syntax--structure .syntax--string.syntax--quoted.syntax--double > *.syntax--punctuation.syntax--begin,
+.syntax--json .syntax--meta.syntax--array.syntax--structure .syntax--string.syntax--quoted.syntax--double > *.syntax--punctuation.syntax--end {
+  color: #89DDF3;
+}
+.syntax--json .syntax--meta .syntax--punctuation.syntax--separator.syntax--key-value + .syntax--string.syntax--quoted {
+  color: #C3E88D;
+}
+.syntax--json .syntax--meta .syntax--punctuation.syntax--separator.syntax--key-value + .syntax--string.syntax--quoted * {
+  color: currentColor;
+}
+.syntax--json .syntax--meta .syntax--punctuation.syntax--separator.syntax--key-value + .syntax--string.syntax--quoted *.syntax--punctuation.syntax--begin,
+.syntax--json .syntax--meta .syntax--punctuation.syntax--separator.syntax--key-value + .syntax--string.syntax--quoted *.syntax--punctuation.syntax--end {
+  color: #89DDF3;
+}
+.syntax--json .syntax--meta.syntax--structure.syntax--dictionary .syntax--string.syntax--quoted {
+  color: #C792EA;
+}
+.syntax--json .syntax--meta.syntax--structure.syntax--dictionary .syntax--string.syntax--quoted .syntax--punctuation.syntax--string {
+  color: currentColor;
+}
+.syntax--php.syntax--keyword.syntax--operator.syntax--assignment {
+  color: #C792EA;
+}
+.syntax--php.syntax--meta.syntax--object {
+  color: #82AAFF;
+}
+.syntax--php.syntax--meta.syntax--arguments {
+  color: #C792EA;
+}
+.syntax--python .syntax--meta.syntax--function-call {
+  color: #82AAFF;
+}
+.syntax--python .syntax--meta.syntax--function-call .syntax--punctuation {
+  color: #89DDF3;
+}
+.syntax--python .syntax--meta.syntax--function-call .syntax--arguments {
+  color: #7986CB;
+}
+.syntax--python .syntax--meta.syntax--function-call .syntax--arguments.syntax--punctuation {
+  color: #89DDF3;
+}
+.syntax--python .syntax--variable.syntax--self {
+  color: #FF5370;
+}
+.syntax--python .syntax--meta .syntax--punctuation.syntax--inheritance,
+.syntax--python .syntax--meta .syntax--punctuation.syntax--section {
+  color: #89DDF3;
+}
+.syntax--python .syntax--variable.syntax--parameter {
+  color: #89DDF3;
+}
+.syntax--python .syntax--keyword.syntax--operator {
+  color: #C792EA;
+}
+.syntax--ruby .syntax--punctuation.syntax--separator {
+  color: #89DDF3;
+}
+.syntax--ruby .syntax--variable.syntax--block {
+  color: #F07178;
+}
+.syntax--ruby .syntax--variable.syntax--instance {
+  color: #F07178;
+}
+.syntax--ruby .syntax--variable.syntax--instance .syntax--punctuation {
+  color: currentColor;
+}
+</style>
+
+  </head>
+  <body>
+    <h1>4 The protein folding problem</h1>
+<h2>Introduction</h2>
+<p>In the 50s, Anfinsen experiments:</p>
+<ul>
+<li>Used Mercaptoethanol to reduce disulfide bridges</li>
+<li>Urea to denaturalize due to low PH</li>
+<li>Observed how the protein folded back to its native conformation.</li>
+<li>added notes (If the renaturalization of the protein was too fast, it could fold to a wrong structure. Furthermore, other proteins need chaperones to fold properly)</li>
+</ul>
+<h2>Anfinsen’s dogma: The thermodynamic hypothesis</h2>
+<p>Proteins adopt structures that corresponds to their global minimum of free energy:</p>
+<p><span class="math inline-math"><script type="math/tex">\Delta G = \Delta H - T \Delta S</script></span></p>
+<p>Protein folding problem can be restated as finding the structure corresponding to the global minimum of free energy. Different several characteristics of the folding affect the energy state of the system, and these can be represented mathematically using different expressions, where usually there exists a tradeoff between accuracy modeling the physical term and complexity of the mathematical expression. In the following, some options for modeling those will be presented.</p>
+<p><a href="">https://manual.gromacs.org/documentation/current/reference-manual/functions/bonded-interactions.html</a></p>
+<h2>Energetics of protein folding</h2>
+<p><img src="images/driv-forc.png" alt=""></p>
+<p><img src="images/summary-forces.png" alt=""></p>
+<h3>Non-covalent interactions</h3>
+<h4>van der Waals interactions</h4>
+<p>Correspond to:</p>
+<ul>
+<li>Permanent dipole-permanent dipole forces</li>
+<li>Permanent dipole-induced dipole forces</li>
+<li>instantaneous induced dipole-induced dipole(London dispersion forces).</li>
+</ul>
+<h5>Lennard-jones Potential:</h5>
+<p><span class="math inline-math"><script type="math/tex">V(r) = 4 \epsilon \left[\left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^{6}\right]</script></span></p>
+<ul>
+<li>The first term with power 12 represents the repulsion between the particles</li>
+<li>The second term with power 6 represents the attraction.</li>
+<li><span class="math inline-math"><script type="math/tex">\epsilon</script></span> represents the depth of the dwell</li>
+<li><span class="math inline-math"><script type="math/tex">\sigma</script></span> represents the r with V = 0</li>
+<li>r is the distance between two particles</li>
+<li>Notice that <span class="math inline-math"><script type="math/tex">\frac{\sigma}{r}</script></span> &lt; 1 if the particles are further than <span class="math inline-math"><script type="math/tex">\sigma</script></span>, and in this case the attraction term is bigger, and the function tends to 0 from below as r grows.</li>
+<li>and <span class="math inline-math"><script type="math/tex">\frac{\sigma}{r}</script></span> &gt; 1 if the particles are further than <span class="math inline-math"><script type="math/tex">\sigma</script></span>, and in this case the repulsion term is bigger, so V tends to infinity as r goes to 0 (highly unfavorable energetics)</li>
+<li>Both terms have even exponents, so the function has a global minimum.</li>
+</ul>
+<p><img src="images/lennard.png" alt=""></p>
+<p>The force can be derived from the gradient of the formula:</p>
+<p><img src="images/grad_lenn.png" alt=""></p>
+<h4>Ionic (electrostatic) interactions</h4>
+<p>Attraction between particles of opposite net charge(positive or negative), and repulsion between particles of the same symbol. In general these forces are depending additively of the net charge, and are strongly influenced by the characteristics of the solvant. It can represent the interaction between ions, and between ions and dipoles.</p>
+<p>Usually modeled using Coulomb’s law, which in vectorial form is:</p>
+<p><span class="math inline-math"><script type="math/tex">E_{vacuum}(i, j) = \frac {q_1 q_2}{4 \pi \epsilon _0 r_{ij}^2}</script></span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline-math"><script type="math/tex">\epsilon _0</script></span> is the electric constant in vacuum</li>
+<li><span class="math inline-math"><script type="math/tex">q_i, q_j</script></span> are the net charge of the two particles</li>
+<li><span class="math inline-math"><script type="math/tex">r_{ij}</script></span> is the distance between the particles</li>
+</ul>
+<p>and for other media we have:</p>
+<p><span class="math inline-math"><script type="math/tex">E_{medium}(i, j) = \frac {1}{D_{medium}} \cdot E_{vacuum}</script></span></p>
+<p>Where <span class="math inline-math"><script type="math/tex">D_{medium}</script></span> represents the dielectric constant of medium (80 for water, 2-3 for protein interior)</p>
+<p>Also can be used for modeling dipole-dipole interactions, where the dipole moments have to be considered.</p>
+<h3>Covalent interactions</h3>
+<p>Derived from the distances, angle… of the covalent bonds.</p>
+<h4>Covalent bond distance</h4>
+<p>Can be described using Morse-potential or approximated using harmonic potential.</p>
+<p><img src="images/harm-morse.png" alt=""></p>
+<h5>Morse potential</h5>
+<p><span class="math inline-math"><script type="math/tex">E_{morse} = D(1 - e^{-B(r-r_0)})^2</script></span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline-math"><script type="math/tex">D :=</script></span>  the well depth</li>
+<li><span class="math inline-math"><script type="math/tex">B :=</script></span> the width of the well</li>
+<li><span class="math inline-math"><script type="math/tex">r_0 :=</script></span> equilibrium bond distance</li>
+<li><span class="math inline-math"><script type="math/tex">r :=</script></span> actual bond distance</li>
+</ul>
+<h5>Harmonic (quadratic) potential</h5>
+<p><span class="math inline-math"><script type="math/tex">E_H = k_{ij} (r_{ij} - r_0)^2</script></span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline-math"><script type="math/tex">k_{ij} :=</script></span> bond specific shape of the function</li>
+<li><span class="math inline-math"><script type="math/tex">r_0 :=</script></span> equilibrium bond distance</li>
+<li><span class="math inline-math"><script type="math/tex">r :=</script></span> actual bond distance</li>
+</ul>
+<h4>Covalent bond angles</h4>
+<p><img src="images/bond-angle-theta.png" alt=""></p>
+<h5>Single bonds</h5>
+<p><strong>Single Bond angle vibration</strong> is represented by an harmonic potential too, but is less stiff than the bond distance.</p>
+<p><span class="math inline-math"><script type="math/tex">V_{a}(\theta_{ijk}) = k_{ijk}^\theta (\theta_{ijk} - \theta_0)^2</script></span></p>
+<h5>Dihedral angles</h5>
+<p><strong>Dihedral angles</strong> present a periodic behaviour energy-wise.</p>
+<p><img src="images/torsion-ethane.png" alt=""></p>
+<p>The different conformations of side chains due to rotatable bonds are called rotamers.</p>
+<p>Torsion energies of the dihedral angle are described by the angles and their multiplicities, and are the source of conformational flexibility for the same protein structure.</p>
+<p>A possible form for modeling this:</p>
+<p><span class="math inline-math"><script type="math/tex">E_{tors} = k(1 + cos(n \tau - \tau_0))</script></span></p>
+<ul>
+<li><span class="math inline-math"><script type="math/tex">\tau :=</script></span> Dihedral angle</li>
+<li><span class="math inline-math"><script type="math/tex">n :=</script></span> Multiplicity</li>
+<li><span class="math inline-math"><script type="math/tex">k :=</script></span> constant depending on the atom types defining the dihedral angle</li>
+</ul>
+<h5>Disulfide bonds</h5>
+<p>Frequently formed in smaller proteins where are needed for the stabilization, because non-covalent forces are too small</p>
+<h3>Solvation energy</h3>
+<p>The interaction of a protein with the solvant has a big impact on the energetics of the system. Solvation involves bond formation, hydrogen bonding and Van der Waals forces.</p>
+<p>Solvation energy is the term used for describing the energetic change of the system due to this interactions, which wouldn’t occur in vacuum.</p>
+<p>Every atom has a specific solvation energy per surface, which can be computed, but it’s expensive. Considering all pairwise interactions between the protein and the water molecules in in practice not done, due to the large number of degreees of freedom needed to model water.</p>
+<p>A simplified model assumes that solvation energy is proportional to the surface area buried after folding.</p>
+<p><strong>Born energy</strong> is the term used for describing the change in free energy of transferring an ion from a medium of low dielectric constant (i.e the interior of the protein) to one of high dielectric constant (i.e the surface in contact with water).</p>
+<h3>Hydrophobic effect</h3>
+<p>The hydrophobic effect is the observed tendency of nonpolar substances to aggregate in an aqueous solution and exclude water molecules, and constitutes the strongest driving force for protein folding.</p>
+<p>Water forms ordered arrangements (cages) around hydrophobic solutes, with low entropy. If hydrophobic sidechains are packed together, the entropy of the solvent is higher, which is energetically favorable.</p>
+<h2>Entropy. The folding funnel</h2>
+<p>Under statistic mechanics, entropy is proportional to the number of possible microscopic configurations (microstates), which could give rise to the observed macroscopic state (macrostate) of the system.</p>
+<p>Boltzmann entropy equation:</p>
+<p><span class="math inline-math"><script type="math/tex">S = k_b ln(W)</script></span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline-math"><script type="math/tex">k_b :=</script></span> Boltzmann constant</li>
+<li><span class="math inline-math"><script type="math/tex">W :=</script></span> the number of microstates</li>
+</ul>
+<p>Clasical thermodynamics:</p>
+<p><span class="math inline-math"><script type="math/tex">\Delta S = \frac {\Delta Q_{rev}}{T}</script></span></p>
+<p>Applied to proteins:</p>
+<ul>
+<li>In unfolded state, many conformations for bond angles, sidechains… are possible, the entropy is high.</li>
+<li>In folded state, only one (or a few) microstates are possible, hence the entropy is low.</li>
+</ul>
+<p>In order to be able to fold, proteins have to compensate this loss of entropy by enthalpic contributions.</p>
+<p>Furthermore, how do proteins find the lowest energy state?</p>
+<h3>Models for protein folding</h3>
+<p>The <strong>Levinthal paradox</strong> states that the number of possible conformations that can be reach by a protein with a certain sequence is so high, that if proteins would “try out” all of them until they found the right one, it would need more time than the current age of the universe to find its correct fold.</p>
+<p>In conclussion: Protein folding is not a random or exhaustive search, it occurs along a gradient towards the global minimum, as visualized in the <strong>folding funnel</strong>.</p>
+<p><img src="images/fold-funnel.png" alt=""></p>
+<p>Some properties of this model:</p>
+<ul>
+<li>Different initial conformations lead to the same global minimum</li>
+<li>Local minima can act as kinectic traps, that also can correspond to alternative foldings.</li>
+</ul>
+<h4>Two-state folding model</h4>
+<ul>
+<li>Only considers two states (folded and unfolded)</li>
+<li>recquires cooperavity</li>
+<li>likely true for small proteins</li>
+</ul>
+<h3>Step-wise folding model</h3>
+<ul>
+<li>
+<ol>
+<li>Formation of structural elements</li>
+</ol>
+</li>
+<li>Condensation of preformed elements into 3D structure</li>
+</ul>
+<h3>Lattice proteins folding model</h3>
+<p><img src="images/lattice-prot.png" alt=""></p>
+<ul>
+<li>Highly simplified model for protein folding.</li>
+<li>It considers the folding as a path on a 2D or 3D grid.</li>
+<li>Polar and hydrophobic residues are considered separately</li>
+<li>Estimates the energetics in function of adjacency in the lattice.</li>
+</ul>
+<h1>5 Prediction of protein structure</h1>
+<h2>Introduction</h2>
+<p>Thermodynamic hypothesis: Proteins fold into the conformation of minimal free energy. By finding this minima we can solve the protein folding problem.</p>
+<p>Proteins are flexible, and this is essential for function. This can be simulated in several ways, with different degrees of accuracy.
+<img src="images/md-simulations.png" alt=""></p>
+<h2>Classical mechanics</h2>
+<p>Is the easiest method computationally speaking.
+Models forces using hook’s law (harmonic potential), doesn’t take into account quantum effects and doesn’t treat electrons explicitly.
+The time complexity of considering bond mediated interactions is <span class="math inline-math"><script type="math/tex">O(N)</script></span>. Considering spatial interactions, is <span class="math inline-math"><script type="math/tex">O(N^k)</script></span>, where k is the number of elements considered for the spatial interactions.</p>
+<h2>Force fields</h2>
+<p>A force field is a model whose objective is describing the energetic landscape of the different possible conformations of a molecule. For that purpose a force field describes the interactions through different analytical forms, and contains also knowledge-derived parameters that make possible this modelization and rules to associate parameters to atom types.
+They can make use of different treatments of the analytical forms (classical treatment, ML derived…)
+Parametrization can be:</p>
+<ul>
+<li>Based on quantum-mechanics calculations
+<ul>
+<li>Exotic geometries are accesible</li>
+<li>Critically depends on choice of modeling method</li>
+<li>inexpensive</li>
+</ul>
+</li>
+<li>Based on experimental data
+<ul>
+<li>Limited by the scarcity of good experimental data</li>
+<li>Only natural geometries are accesible</li>
+</ul>
+</li>
+</ul>
+<p>Some examples of Force fields often used for protein structure prediction are AMBER, CHARMM and GROMOS.
+<img src="images/force-field-class.png" alt=""></p>
+<h3>Example 1: ECEPP/2</h3>
+<ul>
+<li>Models bond lengths and angles as stiff, so they are constraints and not parameters.</li>
+<li>The conformational flexibility is derived from different dihedral angles.</li>
+<li>Van der waals interactions are modeled using Lennard-Jones-potential</li>
+<li>Electrostatics using Coulomb</li>
+<li>Torsions using cosine-term</li>
+<li>H-Bonds using 10-12 potential are treated as non-directional electrostatic interactions</li>
+</ul>
+<h3>Example 2: AMBER (Assisted Model Building with Energy Refinement)</h3>
+<p>Five contributions:</p>
+<ul>
+<li>Bond lengths (<span class="math inline-math"><script type="math/tex">E_{stretch}</script></span>)</li>
+<li>Bond angles (<span class="math inline-math"><script type="math/tex">E_{bend}</script></span>)</li>
+<li>Dihedrals (<span class="math inline-math"><script type="math/tex">E_{tors}</script></span>)</li>
+<li>Van-der-Waals (<span class="math inline-math"><script type="math/tex">E_{vdW}</script></span>)</li>
+<li>Electrostatics (<span class="math inline-math"><script type="math/tex">E_{ES}</script></span>)</li>
+</ul>
+<p><span class="math inline-math"><script type="math/tex">E = E_{stretch} + E_{bend} + E_{tors} + E_{vdW}+ E_{ES}</script></span></p>
+<p>It also uses additional constraints to keep planar systems (aromatic rings) planars.</p>
+<p>It uses 54 different atom types, i.e:</p>
+<ul>
+<li>C - <span class="math inline-math"><script type="math/tex">sp^2</script></span> carbon in carbonyl group</li>
+<li>CT - Aliphatic sp^3 carbon
+…</li>
+</ul>
+<h3>Class II Force Fields</h3>
+<ul>
+<li>Make use of Anharmonic potentials (i.e Morse potential, more accurate than harmonic potential for describing bond energecits)</li>
+<li>Include cross terms, describing coupling between different terms (e.g. bond lengths and angles)</li>
+</ul>
+<h2>Modeling of particle motion</h2>
+<p>Can be modeled using classical mechanics in function of position velocity and acceleration: Three newton laws of motion.</p>
+<p>Acceleration: can be computed derived from forces and masses thanks to the equation:</p>
+<p><span class="math inline-math"><script type="math/tex">a = F/m</script></span></p>
+<p>Force can be derived,as commented, from the energy thanks to the equation:</p>
+<p><span class="math inline-math"><script type="math/tex">F(r) = - \nabla E(r)</script></span></p>
+<p>where <span class="math inline-math"><script type="math/tex">\nabla = \left(\frac{\partial}{\partial x},\frac {\partial}{\partial y}, \frac{\partial}{\partial z}\right)</script></span></p>
+<p>Then this information can be used for creating a system of linear equations, which can be numerically solve yielding a simulated molecular dynamics.</p>
+<h3>Trajectory</h3>
+<p>Trajectory: the path that an object with mass in motion follows through space as a function of time.</p>
+<p>Trajectories can be found integrating the equations of motion.</p>
+<h3>Phase space</h3>
+<p>The positions of the elements of the system is not sufficient to describe the state of a dynamic system.</p>
+<p>Phase space: Positions + momentums of the elements of the system describing its state.</p>
+<h2>Molecular dynamics simulations (MDS)</h2>
+<p>Simulation of the dynamics of molecular systems based on force fields and associated equations of motion.
+e.g Derivatives of AMBER terms.</p>
+<p>They can make use of cut-off radii: Compute interactions only with molecules in a ball centered on the particle with a given radius. but:</p>
+<p>They introduce discontinuities (solved using solution-shifting functions or switching functions)</p>
+<p><img src="images/cut-off.png" alt=""></p>
+<h3>Algorithms used for integrating equations of motion</h3>
+<ul>
+<li>Motion of particles is coupled (many-body problem)</li>
+<li>Analytical integration not possible <span class="math inline-math"><script type="math/tex">\implies</script></span> Approximated by numerical integration</li>
+<li>Assumption: terms expressed as Taylor-series expansion</li>
+</ul>
+<h4>Taylor-expansion</h4>
+<p><span class="math inline-math"><script type="math/tex">f(x + \Delta X) = \sum \frac {1}{v!}f^v(x) \Delta x ^v</script></span></p>
+<p>This is an infinite power series, but are usually approximated by terminating series.</p>
+<h4>Verlet integration</h4>
+<p>Uses information of current and preceeding timestep to compute position and forces for the next time step.
+At time t, t r(t) and r(t-<span class="math inline-math"><script type="math/tex">\Delta</script></span> t are known)</p>
+<p><span class="math inline-math"><script type="math/tex">r(t + \Delta t = 2r(t) - r(t - \Delta t) + \Delta t^2 a(t))</script></span></p>
+<p>After the computation of the next discrete position, iteration starts again.</p>
+<p>It can be modified to be used with velocities:</p>
+<p><span class="math inline-math"><script type="math/tex">v(t) = \frac {1}{2 \Delta t}\left(r(t + \Delta t - r (t - \Delta t))\right)</script></span></p>
+<p>Where also an initial condition is necessary because <span class="math inline-math"><script type="math/tex">t = 0</script></span> is not defined</p>
+<p>Time step:</p>
+<ul>
+<li>if too short the simulation takes unnecessarily long</li>
+<li>if too long the forces becomes too large and the simulation “explodes”
+<img src="images/verlet-int.png" alt=""></li>
+</ul>
+<h4>Simulation of water</h4>
+<p>Can be treated explicitly. But simulations become very expensive.</p>
+<h4>Simulations depending on T</h4>
+<p><a href="">https://sites.engineering.ucsb.edu/~shell/che210d/Advanced_molecular_dynamics.pdf</a></p>
+<p>If T is constant: the canonical NVT-ensemble treats pressure and energy as variables, and the different temperatures describe the tendence of the system to fold or not. If we want to consider a system where the temperature is not constant, we have to consider the changes in the molecular kinetics produced by this changes. Several different strategies:</p>
+<ul>
+<li>Velocity rescaling: At each time step, the new temperature is derived from the kinetic energy. This doesn’t capture the correct kinetic energy fluctuations.</li>
+<li>Berendsen thermostat: Similar to Velocity rescaling, but there’s an additional timescale for temperature rescaling. It suffers from the same problems as velocity rescaling.</li>
+<li>Andersen thermostat: It also models random colisions between particles, and particles and the heat bath, in function of a colision frequency (<span class="math inline-math"><script type="math/tex">\tau</script></span>), where kinetic energy is transfered. It produces the correct canonical ensemble, but true molecular kinetics are not represented.</li>
+<li>Other thermostats: More involved and accurate approaches.</li>
+</ul>
+<h1>6.1 Energy Minimization</h1>
+<h2>Introduction</h2>
+<p><img src="images/energy-hypers.png" alt=""></p>
+<p>Energetic landscape: The collection of points over the different variables <span class="math inline-math"><script type="math/tex">(Var1,Var2,...,VarN, Energy</script></span>) constitutes an Hyperplane.</p>
+<p>Local Minima in this hyperplane correspond to energetically favorable conformations.</p>
+<p>The global minimum corresponds to the fold of the molecule.</p>
+<h2>Ensemble average</h2>
+<p>Properties of molecular systems defined by the average over all molecules.</p>
+<p>Ensemble average weighted by relevance:</p>
+<ul>
+<li>Energetically unfavorable states do not contribute much.</li>
+<li>Energetically favorable, more frequent, contribute much.</li>
+</ul>
+<p>Ergodic hypothesis: Time average = ensemble average.</p>
+<h2>Strategies for searching minima</h2>
+<p>Local minima are easier to find than global minima.</p>
+<h3>Gradient descent methods</h3>
+<span class="math display-math"><script type="math/tex; mode=display">gradient = \nabla = \left(\frac{\partial}{\partial x_1}, \frac{\partial}{\partial x_2}, ..., \frac{\partial}{\partial x_n}\right)
+</script></span>
+<p>The gradient points towards the steepest slope of f at a given point.</p>
+<p>It’s intuitive to follow this gradient until we reach a point with <span class="math inline-math"><script type="math/tex">\nabla = 0</script></span> (or a threshold for the root mean square of the gradient previously defined), which corresponds to a minima, maxima or a saddle.</p>
+<p><img src="images/grad-desc.png" alt=""></p>
+<h4>Steepest gradient descent (SD)</h4>
+<ul>
+<li>Greedy algorithm</li>
+<li>Always chooses direction of steepest descent</li>
+<li>Continue until no further descent</li>
+<li>Determining size of the step is critical.
+<img src="images/steep-desc.png" alt="">
+Advantages:</li>
+<li>Simple, fast for steep gradients</li>
+<li>Numerically stable</li>
+<li>Fast and accurate for convex functions</li>
+</ul>
+<p>Disadvantages:</p>
+<ul>
+<li>Slow convergence</li>
+<li>Search directions can be orthogonal</li>
+<li>Can result in zig zag searches</li>
+</ul>
+<h4>Conjugated gradient descent</h4>
+<p>It keeps memory of the last search direction.
+<span class="math inline-math"><script type="math/tex">s = -g_k + \beta_{k+1} s_{k-1}</script></span></p>
+<p>Where <span class="math inline-math"><script type="math/tex">\beta</script></span> is the weight of the last search direction, a parameter than needs to be set properly.</p>
+<h3>Conformational search methods</h3>
+<p>Gradient descent methods are able to find only local minima, which can correspond to the global maximum or not.</p>
+<p>Other methods need to be used if we want to find the global minimum for sure.</p>
+<h4>Systematic (grid based) search</h4>
+<p>Only feasible for a small number of degrees of freedom. It leads to combinatorial explosion very fast.</p>
+<p>The number of degrees of freedom can be reduced drastically:</p>
+<ul>
+<li>Coordinates are not independent</li>
+<li>Flexibility lies in torsions</li>
+<li>Not all dihedral angles are feasible</li>
+<li>The number of possible conformations is nonetheless too big.</li>
+</ul>
+<h4>Stochastic methods</h4>
+<p>Ensemble corresponds to phase space (6N) integral.</p>
+<p>Random sampling can be used for estimating this integral <span class="math inline-math"><script type="math/tex">\to</script></span> Monte-Carlo method</p>
+<h5>MonteCarlo Method</h5>
+<p>Randomly sample conformational space.</p>
+<p><img src="images/ensemble-mc.png" alt=""></p>
+<p>Problem: Too many irrelevant conformations are sampled.</p>
+<h4>MonteCarlo method with importance sampling (MCMC)</h4>
+<p>The boltzmann distribution is used for building a markov chain with a sample rejection probability.
+<span class="math inline-math"><script type="math/tex">\frac{p_i}{p_j} = e^{-\frac{E_i - E_j}{k_BT}}</script></span></p>
+<p>A markov chain is a stochastic model, where the current state of the system only depends on the previous state (it has no memory).</p>
+<p><img src="images/mcmc.png" alt=""></p>
+<p>with probability of moving to a new point:</p>
+<p><span class="math inline-math"><script type="math/tex">p(x_n, x_{n+1}) = min\left(\frac{f(x_n+1)}{f(x_{n})}, 1\right)</script></span></p>
+<p>So, if the value of the new point is bigger, it always moves to it, if not, there-s a rejection probability.</p>
+<p>This simulation results in a trajectory and associated energy, but there’s no temporal correspondence between succesive points in the trajectory.
+It’s used to estimate average properties, but also to find minima as the trajectory samples favorable states more often.</p>
+<p><img src="images/md-mc.png" alt=""></p>
+<p><img src="images/md-mc-traj.png" alt=""></p>
+<h4>Simulated annealing</h4>
+<p>Similar to MCMC sample, but the goal is not representing the underlying mathematical function, but finding the global minimum using a metaheuristic approach.</p>
+<p>Adds a new parameter, T.</p>
+<p><span class="math inline-math"><script type="math/tex">p(x_n, x_{n+1}) = min\left( exp(\frac{\Delta(f(x))}{T}), 1\right)</script></span></p>
+<p>This results in a rejection probability dependent on the temperature: If the temperature is very high the system will act as a random walker. If it’s very low as a MCMC.</p>
+<h4>Simulations in different coordinate space</h4>
+<p>Cartesian: Is more flexible, but has many irrelevant conformations
+Torsion Space: Reduced to main variables, the search is efficient but not all conformations are possible</p>
+<h4>Influence of temperature in simulations</h4>
+<p><img src="images/t_sim.png" alt=""></p>
+<p>For simulations considering temperature, simulated annealing is used:
+First the simulation is started with a high temperature, where the system behaves as a random walker, as we lower temperature, the system starts to reject samples, leading hopefully to the global minima, and being able to find the local minima feasible at different temperatures.</p>
+<h2>Overview</h2>
+<p><img src="images/overview-mol-mech.png" alt=""></p>
+<h1>6.2 DB-Derived potentials</h1>
+<p>Semi-empirical based on approximations of quantum-chemistry, such as force-fields, have a low accuracy predicting the folding of proteins. This was proved in “An analysis of incorrectly Folded protein Models” by Karplus, where it was possible to minimize the incoherences between two unrelated proteins, resulting in a false positive for homology.</p>
+<p>This is because force-fields calculations sometimes fail to capture some interactions between side-chains or more distant atoms that result in unfeasible folding predictions.</p>
+<h2>Boltzmann distribution</h2>
+<p>The Bolzmann distribution relates potential energy and temperature to probability</p>
+<p><span class="math inline-math"><script type="math/tex">p(x) \propto e^{\frac {-U(x)}{b_B \cdot T}}</script></span></p>
+<p>where T is temperature and <span class="math inline-math"><script type="math/tex">k_b</script></span> is the Boltzmann constant</p>
+<p><img src="images/boltzmann.png" alt=""></p>
+<p>Key properties:</p>
+<ul>
+<li>Higher energies gives lower probability</li>
+<li>Exponential relationship: Constant energy increase to halve probability</li>
+<li>Temperature dependence: At higher temperature the energy increase has to be bigger</li>
+</ul>
+<p>Sometimes it’s difficult to predict the overall energy of a macro/microstate, but the probability ratio between two states can be efficiently calculated:</p>
+<p><span class="math inline-math"><script type="math/tex">\frac {N_1}{N_2} = e^{\frac{-\Delta E}{k_b T}}</script></span></p>
+<h2>Mean force potentials</h2>
+<p>We can estimate the difference in energy between two states from their counts using the inverse Boltzmann law:</p>
+<p><span class="math inline-math"><script type="math/tex">\Delta E = -k_b \cdot \ln (\frac{N_1}{N_2})</script></span></p>
+<p>Using this and taking into account different relationships (i.e. distances between <span class="math inline-math"><script type="math/tex">C\alpha</script></span> that are 4 positions away in the chain), the relative frequencies of the different distances  can be used to create Boltzmann distributions of the different distances for particular cases. This are the so-called DB-derived Mean Force potentials.</p>
+<p><img src="images/db-mean.png" alt=""></p>
+<h3>Db-derived solvation energies</h3>
+<p>DB-info can be used to derive estimations of solvation energies. For that, we define a <span class="math inline-math"><script type="math/tex">\delta</script></span>-neighborhood in the euclidean space of the different types of aminoacids and count the number of neighboring aminoacids, relative to the overall aa-types:</p>
+<p><span class="math inline-math"><script type="math/tex">E_{aa,r} = -k_b \cdot \ln (\frac{f_{aa,N_r}}{f_{x,N_r}})</script></span></p>
+<p>leading to estimations of the position of the different aminoacids to the water accesible area:</p>
+<p><img src="images/water.png" alt=""></p>
+<h3>Applications</h3>
+<p>Mean force potentials failed to be a good folding-prediction tool, but are a powerful tool for:</p>
+<ul>
+<li>evaluating the correctness of NMR structures.</li>
+<li>Solving the reverse folding problem (finding a sequence compatible with an observed fold).</li>
+</ul>
+<h3>Weaknesses</h3>
+<ul>
+<li>Lack of detail leads to implausible structures (i.e impossible in nature bond angles).</li>
+<li>Fails to capture interactions at a global level, and only considers interactions at the primary sequence level (multibody effect).</li>
+</ul>
+<h3>Summary</h3>
+<p><img src="images/summary.png" alt=""></p>
+<h1>7.1 Protein interactions</h1>
+<h2>Introduction</h2>
+<p>Protein function is determined by their interaction with other proteins:</p>
+<ul>
+<li>Transcription factors with DNA.</li>
+<li>Enzyme-substrate</li>
+<li>Complex formations.</li>
+</ul>
+<p>Proteins interact with other proteins mostly through large hydrophobic flat areas
+(interfaces),
+where some charged residues define the orientation of the interaction.
+These interactions usually involve intermediary water molecules for creating hydrogen bonds.
+The contribution to the energy of the interaction is not uniform: few residues correspond
+to the main part of the energy.</p>
+<p>Protein flexibility:</p>
+<p><img src="images/flex.png" alt=""></p>
+<p>Although their limits are sometimes blurred, there are three main in-silico approaches for finding protein-protein interactions:</p>
+<ul>
+<li>Based on observed 3D structures</li>
+<li>Based on sequence information (<em>ab initio</em>).</li>
+<li>Based on evolutionary relationships.</li>
+</ul>
+<h2>Structure-based methods</h2>
+<p>Mostly assume protein are rigid bodies and a key-lock model.
+Overview of the general algorithm:</p>
+<p><img src="images/general-algo.png" alt=""></p>
+<p>Models use 6 degrees of freedom (X, Y, Z-rotation, translation).
+Modifying those parameters they try to find the rigid transformation bringing B in contact with A.
+They take into account both spatial and chemical interactions.</p>
+<h3>Rigid body search</h3>
+<p>Proteins are discretized, transformed into a 3d matrix, where each cell can have different values:</p>
+<ul>
+<li>
+<p>Larger protein’s position is fixed, the bins corresponding to the core of the molecule have a negative value (penalization score), the surface has a value of one and the outside a value of 0.</p>
+</li>
+<li>
+<p>Smaller protein can have only two values: 1 in the interior of the molecule and 0 on the outside.</p>
+</li>
+<li>
+<p>Then the shape complementarity is calculated as the convolution of a on b:</p>
+<p><span class="math inline-math"><script type="math/tex">C_{\alpha, \beta, \gamma} = \sum_{l}\sum_{m}\sum_{n} a_{l, m, n} \cdot b_{l+\alpha, m+\beta, n+\gamma}</script></span></p>
+</li>
+</ul>
+<p>The objective is to maximize this function, where for each bin contributes: +1 if there’s an overlap between smaller protein and surface of bigger protein. p (for example -15) if the smaller protein overlaps with interior of bigger protein. 0 otherwise.</p>
+<p>Exhaustive search is <span class="math inline-math"><script type="math/tex">O(N^6)</script></span>, <span class="math inline-math"><script type="math/tex">O(N^3logN^3)</script></span> if Fourier Fast transform is used.</p>
+<p><img src="images/algo-fourier.png" alt=""></p>
+<h3>Global search</h3>
+<ul>
+<li>Through exhaustive search of Montecarlo sampling.</li>
+<li>Scoring based on energy terms such as force-fields.</li>
+</ul>
+<h3>Semi-flexible Docking</h3>
+<p>Assumes the backbone is rigid and side chains are flexible.</p>
+<p>Algorithm rearranges side chains and calculates energy.</p>
+<h3>Brownian Dynamics simulation</h3>
+<ul>
+<li>Simulates physical encounter of molecules in solution.</li>
+<li>Is highly expensive computationally.</li>
+<li>Based on Langevin equation, which describes the evolution of the position of one molecule.</li>
+</ul>
+<h3>Docking of IDP</h3>
+<ul>
+<li>Intrinsically disordered proteins interactions are based mostly explained by large differences in net charge between proteins, and is a phenomenon gaining importance during the recent years.</li>
+</ul>
+<h2><em>Ab initio</em> docking</h2>
+<p>Classical docking problem for finding interactions in a database where we only have information about the sequence of the proteins.
+Force fields using for predicting the conformations.</p>
+<p>If we consider all against all, the search becomes fast computationally intractable, so instead docking by homology is used.</p>
+<h3>Ab initio methods for qualitative protein interaction</h3>
+<ul>
+<li>Tries to predict if proteins interact, not with what.</li>
+<li>Based on classification algorithms, such as Support Vector Machine, based on Amino acid residues properties.</li>
+</ul>
+<h2>Methods based on evolutionary relationships</h2>
+<p>There are several evolutionary signs that could suggest that two proteins interact:</p>
+<ul>
+<li>Closeness in genome: Genes, specially in procariotes, tend to conserve their neighborhoods, specially when two genes interact with eachother.</li>
+<li>Homology of two genes with a fusioned gene in another species (Specially common in metabolic proteins): Genes that operate in metabolic complexes are more likely to fusion during evolution.</li>
+<li>Coevolution: If genes tend to evolve together (appear and disappear together) during evolutionary history, they are more likely to interact. But general phylogenetic relationships introduce a lot of noise.</li>
+</ul>
+<h1>7.2 Small molecule-protein interactions</h1>
+<h2>Virtuell screening</h2>
+<p>Range of <em>in-silico</em> techniques for searching large compound databases to select a smaller number for biological testing</p>
+<p><img src="images/vscreen.png" alt=""></p>
+<h2>Ligand based methods</h2>
+<h3>Similarity searching</h3>
+<p>Structurally similar proteins tend to have similar properties
+Three components are used for measuring the similarity between 2 molecules:</p>
+<ul>
+<li>Molecular descriptors:
+<ul>
+<li>Physicochemical properties</li>
+<li>2D and 3D properties:
+<ul>
+<li>2D <strong>fingerprints</strong> encode in a binary (boolean) array the presence of subfragments in the molecule (i.e CHOH terminal group)</li>
+<li>3D fingerprints: Encode more information than 2D fingerprints, such as concrete relationships of atoms and distances, torsion angles…</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Similarity coefficient: Quantitative measure of simiilarity
+<ul>
+<li><strong>Tanimoto coefficient</strong>: Used to transform vectorial similarity into a numeric similarity measure: <span class="math inline-math"><script type="math/tex">SIM_{RD} = \frac{Shared bits}{Bits_{molA} + Bits_{molB} - Shared bits}</script></span></li>
+<li>Aligment-based 3D similarity: Molecules are aligned in 3D and their shared volumes are compared:
+<span class="math inline-math"><script type="math/tex">SIM_{AB} = \frac{V_C}{V_A + V_B - V_C}</script></span></li>
+</ul>
+</li>
+<li>Weighting function to integrate different data.</li>
+</ul>
+<p>Resources:
+<a href="">https://chem.libretexts.org/Courses/Intercollegiate_Courses/Cheminformatics_OLCC_(2019)/6%3A_Molecular_Similarity/6.1%3A_Molecular_Descriptors</a></p>
+<p><a href="">https://sci-hub.se/https://doi.org/10.1016/B978-0-12-801505-6.00008-9</a></p>
+<h2>Pharmacophore</h2>
+<p><strong>Pharmacophore</strong> are a fingerprint representation of the necessary properties for a molecule in order to be able to interact with a given target.</p>
+<p>Resources:
+<a href="">https://sci-hub.se/https://doi.org/10.1016/B978-0-12-801505-6.00010-7</a></p>
+<h2>Machine learning methods</h2>
+<p><img src="images/ml.png" alt="">
+Resources:</p>
+<p>[<a href="https://www.sciencedirect.com/science/article/pii/S1359644617304695">https://www.sciencedirect.com/science/article/pii/S1359644617304695</a>](Short review about the whole lecture)</p>
+<p>[<a href="https://sci-hub.se/10.1016/b978-0-12-801505-6.00006-5">https://sci-hub.se/10.1016/b978-0-12-801505-6.00006-5</a>](Extensive chapter of a book)</p>
+<h2>Protein ligand docking</h2>
+<p>Similar ligands bind to the same binding site or to dissimilar proteins if they have similar binding sites.
+So, binding site prediction is vital.
+Some facts about binding site that can be used for predicting them:</p>
+<ul>
+<li>There’s no standard definition of what’s a <strong>pocket</strong>, so geometric descriptors are used.</li>
+<li>Biggest cleft corresponds to binding sites in most cases (but not all)</li>
+<li>Specific aminoacids tend to be more present (Arg, His, Trp, Tyr).</li>
+<li>The size of the binding site is not related to the size of the protein, but the number of binding sites is.</li>
+</ul>
+<h2>Energetics driving the protein-ligand binding</h2>
+<p><img src="images/energetics.png" alt=""></p>
+<h2>Measurement of the binding strength between protein and ligand</h2>
+<p><strong><span class="math inline-math"><script type="math/tex">K_d</script></span></strong>: Disociation constant, measures the rate of disociation of the complex protein ligand, and measures the strength of the binding. The lower the constant the stronger the binding.</p>
+<p>Specifity: Specifity of ligand binding is also of high interest for drug design: Ligands with low specificity are more likely to have big side effects or toxicity.</p>
+<h2>Pocket identification methods</h2>
+<p>Several algorithmic approaches are used for the dentification of pockets.</p>
+<ul>
+<li>a. Grid scan methods: They search for protein-solvent-protein and surface-solvent-surface events.</li>
+<li>b. Sphere placement: Pocket is filled with spheres occupying the highest volume</li>
+<li>c. Triangulation of the surface: Merging small to large neighbors.</li>
+<li>d. Iterative coating of the molecular surface searching for atom contacts.</li>
+</ul>
+<p><img src="images/pockets.png" alt=""></p>
+<h2>Methods based on geometric pocket comparisons</h2>
+<p><img src="images/geopocket.png" alt=""></p>
+<h3>Simplified representation</h3>
+<p>First, pockets are indentified, from the surface shape or from the distance between the residues involved and a crystallized ligand.
+Residues involved in pockets are then transformed into a simplified representation of the 3D coordinates of the atoms involved or of <strong>pseudoatoms</strong> (properties of groups of atoms related to the pharcopore, such as aromatic groups, H-bond donors…)</p>
+<p>Resources:</p>
+<p><a href="">https://pubs.acs.org/doi/10.1021/acs.accounts.5b00516</a></p>
+<p>Whole section: <a href="">https://www.sciencedirect.com/science/article/pii/S2001037014600179</a></p>
+<h3>Search for the best structural alignment of the simplified pocket</h3>
+<p>Different possible approaches:</p>
+<h4>Exhaustive search</h4>
+<p>Iterative search for the best translation/rotation, done in two steps:</p>
+<ul>
+<li>Search for similar regions</li>
+<li>Exploration of those regions
+Is simple conceptually but is slow.</li>
+</ul>
+<h4>Geometric searches</h4>
+<ul>
+<li>Geometric hashing
+<a href="">https://user.ceng.metu.edu.tr/~tcan/ceng465/Spring2006/Schedule/geohash.pdf</a></li>
+<li>Graph based: Graph representation is invariant to rotations and translations. Patterns are represented as nodes, and they are connected by edges with weights corresponding to their physical distances. Then, the maximal subgraph isomorphism is found, using graph product and finding the maximum clique in the graph product, using for example Bron-Kerbosch algorithm.</li>
+</ul>
+<h3>Scoring similarities</h3>
+<p>Similarity between predicted cavities have to be scored in order to find candidate proteins with similar functions, etc.
+There’s not a single best measure of structural similarity, so several can be used, for example:</p>
+<ul>
+<li>Tanimoto coefficient, RMSD, sequence similarity measured by Smith-Waterman, comparison of cavity fingerprints…
+Each has advantages and datasets where are good predictors of homology, and others where they behave similarly to random predictions.</li>
+</ul>
+<h3>The effect of protein flexibility</h3>
+<p>Constant conformational changes in proteins add a lot of complexity to the computational problem, when it’s possible to predict correctly, so they are modeled as rigid objects.
+Proteins suffer conformational changes due to allosterism and ligand binding.
+Usually the proteins used for training algorithms are in holo state (bound to a ligand). That adds additional imprecision.</p>
+<p><img src="images/algos_sum.png" alt=""></p>
+<h2>Protein-ligand docking</h2>
+<p>Two steps:</p>
+<ul>
+<li>Search algorithm: Generate different feasible dispositions of the ligand relative to the active site, altering its conformation, position and orientation.</li>
+<li>Scoring function: Quantify an estimation of the binding affinity.</li>
+</ul>
+<h3>Search algorithm</h3>
+<p>It has to deal with many degrees of freedom:</p>
+<ul>
+<li>6 due to translation and rotation</li>
+<li>Conformational degrees of freedom of the protein and ligand.</li>
+<li>The solvent is often ignored, but if considered adds complexity to the model.</li>
+</ul>
+<p>Different combinations are called <strong>poses</strong>.</p>
+<p>It tries to cover the search space as exhaustively as possible, but there’s a tradeoff between time and space coverage.</p>
+<p>Conformational space can be explored before docking or at runtime:</p>
+<ul>
+<li>
+<p>Before docking: An ensemble of conformations is created before docking and they are treated as rigid bodies.</p>
+</li>
+<li>
+<p>At runtime, additional degrees of freedom related to the conformation of the ligand are considered and explored using methods such as MCMC.
+<img src="images/space-algo.png" alt=""></p>
+</li>
+<li>
+<p>DOCK(1982): Rigid docking. Fills the cavity with spheres touching two atoms. The spheres become potential sites for ligand atoms. Ligand are matched to these spheres. If it’s feasible it’s scored. The algorithm returns the pose with the best score.</p>
+</li>
+</ul>
+<p><img src="images/dock.png" alt=""></p>
+<ul>
+<li>FLEXX(1996):
+<ul>
+<li>A base is selected (a rigid core of the molecule, such as aromatic chains to start the algorithm from)</li>
+<li>The base is placed in the binding site independent of the rest of the ligand</li>
+<li>The ligand is constructed in an incremental way adding iteratively more molecules and accomodating its position to the binding site.</li>
+</ul>
+</li>
+</ul>
+<h2>Scoring function</h2>
+<ul>
+<li>RMSD can be used to measure spatial proximity between the protein and the ligand. The idea is that lower RMSD correspond to lower <span class="math inline-math"><script type="math/tex">K_d</script></span></li>
+<li>Lipinski’s rule of five: max. 5 hydrogen bond donors, 10 bond acceptors, molecular mass less than 500 daltons, octanol-water partition coefficient log <span class="math inline-math"><script type="math/tex">P \leq 5</script></span></li>
+</ul>
+<p><img src="images/overview-dock.png" alt=""></p>
+<h1>8 Secondary Structure prediction</h1>
+<h2>Introduction</h2>
+<p>Prediction of secondary structure is an important step towards the prediction of the whole 3D structure. It determines up to some point the global fold.</p>
+<p>The driving forces can be assumed to be found in the local characteristics of the polypeptide chain.</p>
+<p>3 main target classes:</p>
+<ul>
+<li><span class="math inline-math"><script type="math/tex">\alpha</script></span>-helix (H) : HB i-i+4</li>
+<li><span class="math inline-math"><script type="math/tex">\beta</script></span>-sheet (E) :</li>
+<li>random coil ( C)</li>
+</ul>
+<p>All three classes have a similar frequency.</p>
+<p>Other classifications:</p>
+<ul>
+<li>Turns (T)</li>
+<li><span class="math inline-math"><script type="math/tex">3_{10} - helix (G, HB i-i+3 )</script></span></li>
+<li><span class="math inline-math"><script type="math/tex">\pi-helix (I, HB i-i+5)</script></span></li>
+<li>parallel/antiparallel sheets</li>
+<li>Bend (S)</li>
+</ul>
+<h3>Helix dipole moment</h3>
+<p>Alpha helix has an overall dipole caused by the dipoles of the carbonyl groups found in the peptide bond, all pointing along the helix axis, resulting in a positive dipole towards the N-terminus.</p>
+<p>This overall dipole can destabilize the helix. That’s why alpha helices are often capped by a N-terminal positively charged aminoacid.</p>
+<p>This dipole is also of importance because the N-terminal positive charge can be often used to bind negative charged ligans, such as phosphates.</p>
+<h2>Amino Acid propensities</h2>
+<p>Aminoacids are observed at different frequencies in the different secondary structural element types.</p>
+<p>These propensities can be used to predict secondary structure.
+<img src="images/propensities.png" alt=""></p>
+<p>Log(odds)
+<img src="images/logodds.png" alt=""></p>
+<p>Aminoacid classifications:
+<img src="images/aaclas.png" alt=""></p>
+<p>Different methods can make use of already determined propensities:</p>
+<h3>Chou-Fasman method</h3>
+<ul>
+<li>Uses table of propensities derived from CD spectroscopy data of soluble, globular proteins.</li>
+<li>Likelihood for each aminoacid</li>
+</ul>
+<p>Pseudocode:</p>
+<pre class="editor-colors lang-text" style="tab-size: 4;"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text">Chou_fasman(sequence):
+</span>    <span class="syntax--meta syntax--paragraph syntax--text">assign all residues parameters
+    for the whole sequence: #determine alpha helix
+</span>        <span class="syntax--meta syntax--paragraph syntax--text">indentify region where 4/6 have P(H)&gt;100
+</span>            <span class="syntax--meta syntax--paragraph syntax--text">while(set of four has mean(P(H)) &gt; 100):
+</span>                <span class="syntax--meta syntax--paragraph syntax--text">Extend alpha helix
+</span>    <span class="syntax--meta syntax--paragraph syntax--text">for the whole sequence: #determine beta sheet
+</span>        <span class="syntax--meta syntax--paragraph syntax--text">indentify region where 3/5 have P(E)&gt;100
+</span>            <span class="syntax--meta syntax--paragraph syntax--text">while(set of four has mean(P(E)) &gt; 100):
+</span>                <span class="syntax--meta syntax--paragraph syntax--text">Extend beta sheet
+</span>        <span class="syntax--meta syntax--paragraph syntax--text">if average(PE of betasheet) &gt; 105 and P(E) &gt; P(H)::
+</span>            <span class="syntax--meta syntax--paragraph syntax--text">mark region as beta sheet
+</span>        <span class="syntax--meta syntax--paragraph syntax--text">else:
+</span>            <span class="syntax--meta syntax--paragraph syntax--text">discard
+</span>    <span class="syntax--meta syntax--paragraph syntax--text">for the whole sequence: # determine turn
+</span>        <span class="syntax--meta syntax--paragraph syntax--text">p(t) = f(j)f(j+1)f(j+2)f(j+3) # Likelihood
+        if p(t) &gt; 0.000075 and average P(turn) &gt; 100 in tetrapept
+        and P(turn) &gt; P(H) and P(E):
+        tetrapet is a turn</span></span></pre>
+<p><img src="images/properties-chou.png" alt="">
+Problem: it doesn’t take into account the structure of the neighbors</p>
+<h3>The gor method</h3>
+<ul>
+<li>Built on Chou-Fasman values.</li>
+<li>One matrix for each feature</li>
+<li>Evaluate each residue plus 8 in each direction (sliding window of 17)</li>
+<li>Underpredicts beta strand</li>
+</ul>
+<h3>Supervised machine learning methods</h3>
+<ul>
+<li>Train your algorithm on training dataset and evaluate on test dataset.</li>
+<li>k-nearest neighbor methods: Define a starting point as centroid, enclose close elements until k training examples are selected and label them by majority vote.
+<ul>
+<li>Application to proteins:
+<ul>
+<li>make a table of sequence windows from proteins with known structure</li>
+<li>find 50 best aligments with this table</li>
+<li>score frequencies of different structures in the middle position</li>
+<li>Scan sequence for series of high scoring predictions</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Neural Networks can (and are often used) for protein predictions. The general idea of neural networks is to reproduce the structure of neural tissue: Dendrites receive the inputs and the neuron body integrates it in a single output (normally with help of an output sigmoidal function). The algorithm learns the weights of the different inputs, working as a linear transformation ans passes it to the next layer/output.</li>
+</ul>
+<p><img src="images/predator.png" alt="">
+<img src="images/sec-pred.png" alt="">
+<img src="images/psi-pred.png" alt=""></p>
+<h2>Physical approach towards helix prediction(AGADIR)</h2>
+<p>Based on Helix-coil transition theory, general for polymers but often used for proteins. Tries to capture the difference in energy between a coil random structure and an <span class="math inline-math"><script type="math/tex">\alpha</script></span>-helix.</p>
+<p><span class="math inline-math"><script type="math/tex">\Delta G_{helical-segment} = \Delta G_{Int}+\Delta G_{Hbond}+\Delta G_{SD}+\Delta G_{nonH}+\Delta G_{dipole}</script></span></p>
+<p>where:</p>
+<p><span class="math inline-math"><script type="math/tex">\Delta G_{int}</script></span> are the intrinsic tendencies of the residues to adopt helix conformation.</p>
+<p><span class="math inline-math"><script type="math/tex">\Delta G_{Hbond}</script></span> are the contributions of main chain and i, i+4 hydrogen bonds</p>
+<p><span class="math inline-math"><script type="math/tex">\Delta G_{SD}</script></span> Sums the net contributions with respects to the random coil state of all side chain interactions.</p>
+<p><span class="math inline-math"><script type="math/tex">\Delta G_{nonH}</script></span> Captures the contribution to stability of N and C terminal residues.</p>
+<p><span class="math inline-math"><script type="math/tex">\Delta G_{dipole}</script></span> represents the iteraction of charged groups with the helix macrodipole</p>
+<h2>Trans-membrane element prediction</h2>
+<p>Trans membrane proteins constitute 30% of all proteins in a cell, and receptors are an important target for pharmaceutical industry.</p>
+<p>Aminoacids are differentially hydrophobic, and that’s often used for prediction of transmembrane elements.</p>
+<p>Structurally, they tend to have charged residues flanking hydrophobic segments, and the positively charged extrem tend to face towards the cytoplasm (weaker in Archaea).</p>
+<p>Sometimes they also have amphipathic <span class="math inline-math"><script type="math/tex">\alpha</script></span>-helix after the hydrophobic region to interect both with the environment and the cell layer. They tend to have a repetitive structure of charged and hydrophobic residues alternating with a repeat distance corresponding to the period of the structure. This can be seen in a helical wheel plot and hydrophobic moments (a vectorized representation of the hydrophobicity of the sequence).</p>
+<p>The starting point are propensity tables for the different aminoacids representing how likely is for a given aminoacid to interact with water.</p>
+<p>Both for flanking and hydrophobic region are calculated.</p>
+<p><img src="images/prop-hydro.png" alt="">
+There are different likelihood tables:</p>
+<ul>
+<li>Kyte-Doolittle hydropathy.</li>
+<li>Hopp-Woods hydrophilicity.</li>
+<li>Eisenberg et al. normalized consensus.
+Basic hydrophilibity plot: Calculate average hydropathy over a window and slide window until the entire sequence has been analyzed
+<img src="images/post-pro.png" alt=""></li>
+</ul>
+<p>Also markov-chain models are used to solve this problem, and neural networks.</p>
+<p><span class="math inline-math"><script type="math/tex">\beta</script></span>-barrel element prediction is mostly based on hydropathy analysis and similarity search.
+<img src="images/tm-prot.png" alt=""></p>
+<h3>performance assessment</h3>
+<p>Biggest databases result in more accurate predictions.</p>
+<ul>
+<li>Qindex: Percentage of residues correctly predicted as <span class="math inline-math"><script type="math/tex">\alpha</script></span>-helix,coil… the score is high even for random predictions. <span class="math inline-math"><script type="math/tex">Q_3 = \frac {N_{predicted}}{N_{observed}} \cdot 100</script></span></li>
+</ul>
+<h1>9 Homology modelling of protein structure prediction</h1>
+<h2>Introduction</h2>
+<p>The number of protein structures known in the PDB has grown steadily but at a much lower pace than the number of sequences found in Uni-Prot.
+Homology tends to conserve both tertiary and secondary structure, solvent accesibility, and finally function.
+That’s why homology is a valuable information that can be used for structure prediction.
+Basic assumptions:</p>
+<ul>
+<li>Similar sequence = similar structure <span class="math inline-math"><script type="math/tex">\implies</script></span> homologous proteins have similar structures. But it’s not always true, as very diverging sequences can have a high structural homology.</li>
+</ul>
+<h2>Homology derived secondary structure of proteins (HSSP plot)</h2>
+<p>The correct inference of a shared secondary structure by the level of homology between the two sequences depends on the length of the alignment (x axis) and the percentage of homology (y axis).
+<img src="images/hssp-plot.png" alt=""></p>
+<h2>Homology modeling</h2>
+<p><img src="images/homo-modeling.png" alt=""></p>
+<h3>Template selection</h3>
+<p>Done in function of:</p>
+<ul>
+<li>Sequence similarity (&gt;25%, greater is better). For this purpose BLAST or PsiBLAST can be used.</li>
+<li>Quality structure (resolution in A)</li>
+<li>Experimental conditions</li>
+</ul>
+<p>Usually iterative cycles of aligment, modeling and evaluation are done in order to choose the best model possible.</p>
+<h3>Alignment Template - Target</h3>
+<p>Using dynamic programming, and probably a MSA.</p>
+<p>The regions related to secondary structural elements should be conserved, because changes in those regions are likely to result in proteins with different global structures.</p>
+<h3>Structure modeling</h3>
+<ul>
+<li><em>Backbone generation</em>:
+<ul>
+<li>We place the coordinates of the sequence found to be homologous in the database.</li>
+<li>It’s often almost trivial and has the goal of providing an initial guess.</li>
+<li>N, Cα, C and O and often also the Cβ can be copied if two residues differ.</li>
+<li>The side chain can be also placed if the residues are the same</li>
+</ul>
+</li>
+<li><em>Loop modeling</em>:
+<ul>
+<li>In most cases alignments contain gaps.</li>
+<li>Gaps in the model sequence are adressed just omiting those residues.</li>
+<li>If there’s an insertion in the model sequence, residues are placed inbetween.</li>
+<li>Loops of different sequence are hard to predict.</li>
+<li>there are two main approaches:
+<ul>
+<li>Database searching of known loops with the same endpoints and similar length. <span class="math inline-math"><script type="math/tex">\to</script></span> Copy coordinates (works better for short loops), or similar loops are clustered and used as a consensus (i.e BRAGI, LIP).</li>
+<li>Ab-initio: Energy based, huge search space <span class="math inline-math"><script type="math/tex">\to</script></span> montecarlo methods (i.e Moult &amp; James).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><em>Side chain placement</em>
+<ul>
+<li>Cast as an optimization problem</li>
+<li>Find the <strong>torsion angles</strong> of the side chains and <strong>position</strong> of all SC <strong>atoms</strong>, given <strong>fixed backbone coordinates</strong> and an initial guess for the SC positions, resulting in the <strong>minimum global energy</strong>.</li>
+<li>The number of possible combinations is huge, sidechains can have several dihedral angles.</li>
+<li>The packing and interactions are neighboring interactions are difficult to take into account.</li>
+<li>But certain backbone conformations strongly favour certain conformations which leds to a possible reduction of the search space: Some individual angles are much more frequent than others, and the same happens for some combinations of dihedral angles. Those feasible conformations in the torsion angle space are called rotamers, and can be found in rotamer libraries (see below).</li>
+<li>NP-Hard problem. Only simple energy functions can be used for estimating the energy of the placement, but they have to distinguish torsions of the side chains and pairwise interactions between side chains and with the backbone.
+<img src="images/eq-sc.png" alt=""></li>
+<li>Reduced time complexity thanks to dead elimination algorithm from <span class="math inline-math"><script type="math/tex">R^L</script></span> to <span class="math inline-math"><script type="math/tex">RL^2</script></span> to (below), where R is the average number of romaters per position and L the number of residues.</li>
+</ul>
+</li>
+<li><em>Model optimization</em>:
+<ul>
+<li>Its aim it’s the correction of clashes and other local problems more than the finding of a different better model.</li>
+<li>iterative procedure:
+<ul>
+<li>Prediction of rotamers</li>
+<li>Prediction of shifts in the backbone</li>
+<li>Repeat until convergence</li>
+</ul>
+</li>
+<li>MDS and energy minimization are often used.</li>
+<li>Used force fields: AMBER or CHARMM</li>
+<li>Errors in homology models
+<ul>
+<li>Use of wrong templates</li>
+<li>Incorrect alignment</li>
+<li>Errors in the template</li>
+<li>Distortion in correct aligned regions</li>
+<li>Errors in side chain positioning</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><em>Model validation</em>
+<ul>
+<li>Checking bond lengths, bond and torsion angles</li>
+<li>Inside/outside distributions of polar and apolar residues to detect completely misfolded models</li>
+<li>Potentials of mean force for atom contact distance</li>
+<li>Comparison with other homologous proteins, checking if important regions are conserved.
+<img src="images/model-val9.png" alt="">
+<img src="images/limiting-steps.png" alt=""></li>
+</ul>
+</li>
+</ul>
+<h3>Applications</h3>
+<p><img src="images/app-homo-modelling.png" alt=""></p>
+<h3>Resources</h3>
+<p><img src="images/homo-resources.png" alt=""></p>
+<h3>DB-based loop placement</h3>
+<h3>Bragi</h3>
+<p><img src="images/bragi.png" alt=""></p>
+<h3>LIP</h3>
+<ul>
+<li>Loops are clustered according to length and distance</li>
+<li>Fitting the consensus by superimposition of the main atoms in both terminal ends.</li>
+<li>Uses sequence similarity and a loop-specific scoring matrix.</li>
+<li>Scores the different loop candidates with a ranking function derived from the RMSD for the mentioned atoms.</li>
+</ul>
+<h3>Ab-initio loop placement</h3>
+<h3>Moult &amp; James</h3>
+<ul>
+<li>Search possible backbone torsion angles based on Ramachandran possible combinations.</li>
+<li>Add side chains using romaters</li>
+<li>Score by energetic parameters</li>
+</ul>
+<h3>CONGEN</h3>
+<ul>
+<li>Uses discrete angles allowed by the ramachandran plot regions</li>
+<li>Special treatment of Gly and Pro\</li>
+<li>Energies calculated using CHARMM force field</li>
+<li>Side chains constructed in parallel</li>
+</ul>
+<h3>Rotamer libraries: BBind/Bbdep and SCRWL</h3>
+<p>Most used rotamer library, with two variants: Backbone-independent and backbone dependent. Contains up to 81 rotamers per aminoacid.
+Backbone-dependent are given for binned phi/psi angles.
+For every rotamer the following values are given:</p>
+<ul>
+<li>Frequencies</li>
+<li>Torsion angle</li>
+<li>Conditional probabilities on other rotamers</li>
+<li>Standard deviations
+For long sequences it cannot be systematically scanned.</li>
+</ul>
+<p><img src="images/sc-algo.png" alt=""></p>
+<h3>Dead end elimination algorithm</h3>
+<p>Proposed by Desmet et al. and Branch&amp;Bound-like
+It states that if for two rotamers <span class="math inline-math"><script type="math/tex">i_r</script></span> and <span class="math inline-math"><script type="math/tex">i_s</script></span>:</p>
+<p><span class="math inline-math"><script type="math/tex">E_{i_r} + \sum _j min _s E_{i_r, j_s} > E_{i_t} + \sum _j max _s E_{i_t, j_s}</script></span></p>
+<p>Then <span class="math inline-math"><script type="math/tex">i_r</script></span>is not part of the optimal solution, because the lowest energy while using <span class="math inline-math"><script type="math/tex">i_r</script></span> is higher (hence “worse”) than the highest energy using <span class="math inline-math"><script type="math/tex">i_t</script></span>
+<img src="images/dee-algo.png" alt="">
+Remaining search space can be tested by enumeration.</p>
+<h2>Side chain modeling qualiting assessment</h2>
+<p>Highly dependent on the search algorithm used and the quality of the rotamer library.
+Quality measures:</p>
+<ul>
+<li>Percentage of correct <span class="math inline-math"><script type="math/tex">\chi _1</script></span> assignments</li>
+<li>Percentage of correct <span class="math inline-math"><script type="math/tex">\chi _1 + \chi _2</script></span> assignments</li>
+</ul>
+<p>In general the process is more accurate for side chains in the hydrophobic core and low for surface residues, due to the presence of charged AAs, which can adopt many rotation angles and can rotate the charged end influenced by surrounding water molecules.</p>
+<h1>10 Threading</h1>
+<h2>Introduction</h2>
+<p>Folding problem: Given a sequence find its fold</p>
+<p>Inverse folding problem: Given a fold find the sequences compatible with it,</p>
+<p>A given sequence can be compatible with a fold, but that sequence can have other folds with a more favorable energy.</p>
+<p>Threading is the name given for a familiy of algorithms, which for a given sequence, and a set of folds (a template library), try to finding among template structures the fold most compatible with the sequence. For that purpose, threading “threads” the sequence along the protein while it uses as score for the alignment an energy function, which aims to be minimized.</p>
+<p>In reality, as we’ve seen in another problems, considering all the forces leading to a given system’s energy is computationally very expensive. So, considering all the possible correspondences between the sequence and each of the templates is computationally unfeasible. For this reason, we need efficient search algorithms and a reduced search space. Even in reduced search spaces, the search is NP hard.</p>
+<h2>Template library</h2>
+<p>Usually the whole sequence is not considered and only the parts of the sequence corresponding to secondary structural elements are considered. Furthermore the sequences can be split by PDB chains, by different domains, by fragments…</p>
+<h2>The scoring function</h2>
+<p>Usually the energies driving to a given fold are split into different sources:</p>
+<p><span class="math inline-math"><script type="math/tex">E_{total} = w_{single}E_{single} + w_{pair}E_{pair} + w_{gap}E_{gap} + w_{mutate}E_{mutate} + w_{sspred}E_{sspred}</script></span></p>
+<p>And the individual terms are deduced from relative counts of certain patterns in knowledge based on the analysis of databases and the boltzmann distribution. The w corresponds to weight to account for the different importance of each energy.</p>
+<ul>
+<li>
+<p><span class="math inline-math"><script type="math/tex">E_{single}</script></span>: Individually it describes the interaction of a residue of a given type with its environment (secondary structure and position relative to the surface of the protein). The whole term considers the effect of all residues in the sequence.</p>
+</li>
+<li>
+<p><span class="math inline-math"><script type="math/tex">E_{pair}</script></span>: Quantifies the energy of the pairwise interactions. For that purpose, usually the pairwise interactions of the different residue types, measured from different atoms ($c_\alpha - c_\beta, c_\beta - N…) and at different distances is considered.</p>
+</li>
+<li>
+<p><span class="math inline-math"><script type="math/tex">E_{mutate}</script></span>: Quantifies how well the sequence mutates into the template target sequence, based in classical distance matrix like PAM or BLOSUM.</p>
+</li>
+<li>
+<p><span class="math inline-math"><script type="math/tex">E_{gap}</script></span>: Gap penalty scoring gaps in the alignment.</p>
+</li>
+<li>
+<p><span class="math inline-math"><script type="math/tex">E_{sspred}</script></span>: Quantifies the compatibility between the second structural elements found in the query sequence (if known) and the template structure.</p>
+</li>
+</ul>
+<h2>Heuristic reductions of the search space:</h2>
+<p>There are several methods needed for making the search of possible configurations more efficient:</p>
+<h3>3D profiles</h3>
+<p>Account mainly for <span class="math inline-math"><script type="math/tex">E_{single}</script></span>, the 3D structure of the template sequence is reduced to a sequence discretized environmental categories (can also be split by secondary structural elements):</p>
+<p><img src="images/env-cat.png" alt=""></p>
+<p>the score of each residue is given by <span class="math inline-math"><script type="math/tex">s_{i,j} = \frac{ln(P(j|i))}{P_i}</script></span>, where <span class="math inline-math"><script type="math/tex">P(j|i)</script></span> is the probability of finding residue i in environment j, and <span class="math inline-math"><script type="math/tex">P_i</script></span> is the overall probability of i among all classes</p>
+<p>3D profiling example (Bowie et al.):</p>
+<ul>
+<li>Align the sequence with the 3D profile(s) using dynammic programming allowing insertions and deletions</li>
+<li>Optimal gap penalties chosen empirically</li>
+<li>Score of the best alignment is tabulated</li>
+<li>Mean value and stdev of the alignments scores for all sequences is tabulated.</li>
+<li>The match is expressed by its Z-Score <span class="math inline-math"><script type="math/tex">\left(Z = \frac{score - \mu(scores)}{\sigma^2(scores)}\right)</script></span></li>
+<li>All Z above 7 are considered</li>
+<li>DP is fast, but it gives an incomplete description of the environment and doesn’t take into account pairwise or higher order energies.</li>
+</ul>
+<h3>Contact graph (core threading)</h3>
+<p><img src="images/cont-graph.png" alt=""></p>
+<ul>
+<li>Only the secondary structural elements (cores) are considered, and furthermore, some selected contacts are considered.</li>
+<li>It can allow or disallow gaps into those cores, leading to different search complexities. Gaps are allowed in loops.</li>
+<li>Core segments are not allowed to overlap</li>
+</ul>
+<h2>Finding global optimality in threading</h2>
+<p>There’s no proabilistic model for quantifying the probability of a given template being the correct fold of the sequence.</p>
+<p>Confidence measures are used instead:</p>
+<ul>
+<li>Raw score</li>
+<li>z-score  with respect to random sequences</li>
+<li>p-value</li>
+<li>Classification with ML methods</li>
+</ul>
+<h2>Some examples of threading algorithms</h2>
+<h3>Pairwise threading optimization algorithms</h3>
+<p><img src="images/threading-algos.png" alt=""></p>
+<h3>Threader</h3>
+<p><img src="images/threader-algo.png" alt=""></p>
+<p>Calculates pseudo-energies by counts, splitting the distances into three categorical values (Short (<span class="math inline-math"><script type="math/tex">k \le 10</script></span>), Medium and Long (k &gt; 30), considering several different atom pairs and adding solvation potential)</p>
+<h3>Lathrop &amp; Smith</h3>
+<p><img src="images/lathrop.png" alt=""></p>
+<h2>Branch and bound</h2>
+<p>The branch and bound method is an exact method for searching for an optimal alignment, but it takes exponential time in the size of the protein. The algorithm functions by assuming that each solution can be partitioned into subsets, and that the upper limit on a subset’s solution can be computed quickly. In the diagram, each circle illustrates the space of possible threadings, the solid lines indicate partitions made in a previous step, and dashed lines indicate partitions made in the current step. Furthermore, numbers indicate lower bounds for newly created subsets, and arrows indicate the set that was partitioned. Branch and bound selects the subset with the best possible bounds, subdivides it, and computes a bound for each subsequent subset. The aspects of this search which determine its efficiency are how the lower bound for the set of possible threadings is computed, and how the threading set is partitioned into subsets. Ideally, the lower bound should take into consideration the interaction of the set with the preceding set, and the best interaction with other sets. A threading set is partitioned by selecting a core segment, and choosing a split point in the set.</p>
+<p><img src="images/branch-bound.png" alt=""></p>
+<h2>CASP (Critical assessment of techniques for protein Structure Prediction)</h2>
+<p>CASP is a “benchmark” for measuring the accuracy of the different state of the art protein prediction pipelines. It’s needed, because scientists are biased and it’s difficult to compare methods fairly.
+Its goals are:</p>
+<ul>
+<li>Establish capabilities and limitations of current methods of modeling protein structure from sequence</li>
+<li>Determine where progress is being made</li>
+<li>Determine where the field is held back by specific bottlenecks.
+Methods are assesses on the basis of the analysis of a large number of blind predictions of protein structure.</li>
+</ul>
+<p><img src="images/casp.png" alt=""></p>
+<h2>Overview of protein structure prediction</h2>
+<p><img src="images/overview-prot-pred.png" alt=""></p>
+
+  </body>
+</html>
